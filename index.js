@@ -21,16 +21,16 @@ app.use(express.static(path.join(__dirname, '/public')))
 const homeRoute = require('./routes/home.routes')
 app.use(homeRoute)
 
-// socket connection
-io.on('connection', (socket) => {
-
-    console.log('a user joined')
-})
-
-
 
 const PORT = process.env.PORT
 server.listen(PORT, () => {
 
     console.log('Server is up at ', PORT)
+})
+
+
+// socket connection
+io.on('connection', (socket) => {
+
+    console.log('a user joined')
 })

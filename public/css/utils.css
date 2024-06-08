@@ -17,31 +17,6 @@
     position: absolute;
 }
 
-.aside-container {
-    height: 100vh;
-    top: 0;
-    position: sticky;
-    min-width: 25vw;
-    border-right: 2px solid var(--text-3);
-    padding: 25px 5px 10px 5px;
-    display: flex;
-    justify-content: start;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--bg-1);
-    color: var(--text-3);
-}
-
-.aside-top {
-
-    width: 100%;
-    justify-content: space-between;
-    background-color: var(--bg-2);
-    border-bottom: 2px solid var(--bg-3);
-    padding: 14px;
-    color: white;
-}
-
 .ul-container {
 
     width: 100%;
@@ -445,12 +420,14 @@ input:focus {
 
 .btn {
 
-    height: 2.5em;
+    height: 2.4em;
     width: 7em;
     border-radius: 4px;
     cursor: pointer;
     color: white;
     border: none;
+    background-color: green;
+
 }
 
 .btn-submit {
