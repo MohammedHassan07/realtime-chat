@@ -34,17 +34,16 @@ main {
     border-radius: 6px;
     padding: 12px;
     clear: both;
-
-
+    margin-top: 12px;
 }
+
 .left {
     float: left;
-    background-color: green;
-    margin-bottom: 12px;
+    background-color: rgb(0, 94, 0);
 }
 .right {
     float: right;
-    background-color: #005700;
+    background-color: #040;
 }   
 textarea {
 

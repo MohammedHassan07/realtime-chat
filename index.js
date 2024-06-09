@@ -32,5 +32,12 @@ server.listen(PORT, () => {
 // socket connection
 io.on('connection', (socket) => {
 
-    console.log('a user joined')
+    // console.log('a user joined')
+
+    socket.on('send-message', (data) => {
+
+        // console.log(data)
+
+        socket.broadcast.emit('broadcast', data)
+    })
 })
