@@ -2,6 +2,12 @@ console.log('home.js')
 
 const socket = io()
 
+document.addEventListener('DOMContentLoaded', () => {
+
+    document.getElementById('input-message').focus()
+
+})
+
 const btnSend = document.getElementById('btn-send')
 btnSend.addEventListener('click', (e) => {
 
@@ -13,6 +19,7 @@ btnSend.addEventListener('click', (e) => {
     document.getElementById('input-message').value = ''
 
     sendMessage(inputMessage)
+    document.getElementById('input-message').focus()
 })
 
 function appendMessage(message, position) {
@@ -23,6 +30,8 @@ function appendMessage(message, position) {
     const innerMarkup = `
 
         <p>${message}</p>
+
+        <p class="time">12:00 AM</p>
     `
 
     div.innerHTML = innerMarkup

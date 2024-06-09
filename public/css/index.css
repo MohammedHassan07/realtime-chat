@@ -30,21 +30,31 @@ main {
 
 .message {
 
-    width: 45%;
-    border-radius: 6px;
-    padding: 12px;
+    min-width: 20%;
+    max-width: 48%;
+    border-radius: 6px;  
+    padding: 12px 9px 7px 12px;
     clear: both;
-    margin-top: 12px;
+    margin-top: 12px;  
+    line-height: 1.4;
 }
 
 .left {
     float: left;
     background-color: rgb(0, 94, 0);
 }
+
 .right {
     float: right;
     background-color: #040;
-}   
+}  
+
+.time {
+
+    font-size: 12px;
+    float: right;
+    margin-top: 12px;
+}
 textarea {
 
     padding-left: 12px;
