@@ -22,16 +22,26 @@ btnSend.addEventListener('click', (e) => {
     document.getElementById('input-message').focus()
 })
 
-function appendMessage(message, position) {
+function appendMessage(data, position) {
 
     const div = document.createElement('div')
     div.classList.add('message', position)
 
+    const date = new Date()
+
+    let hours = date.getHours() % 12
+    hours = hours ? hours : 12
+    
+    const ampm = hours <= 12 ? 'PM' : 'AM'
+
+    const time = `${hours}:${date.getMinutes()} ${ampm}`
+
     const innerMarkup = `
 
-        <p>${message}</p>
+        <p>${data.message}</p>
 
-        <p class="time">12:00 AM</p>
+        
+        <p class="time">${data.time}</p>
     `
 
     div.innerHTML = innerMarkup

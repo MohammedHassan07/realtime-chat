@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./css/utils.css">
+    <link rel="stylesheet" href="./css/authentication.css">
+
+    <title>BucketPay - Registration</title>
+</head>
+
+<body>
+
+    <main id="main" class="column-container">
+
+        <div id="login-form-div" class="column-container wp-100 smooth">
+            <form class="column-container form mt-14">
+                <h2>Login to BucketPay</h2>
+
+                <div>
+                    <input id="mobile" type="tel" , placeholder="Enter Your Mobile Number">
+                </div>
+                <div>
+                    <input id="password" type="password" , placeholder="Enter Your Password">
+                </div>
+                <div class="t-center">
+                    <button id="btn-login">Log In</button>
+                </div>
+                <div id="error-message" class="hide">
+                    <p>Error</p>
+                </div>
+                <div class="horizontal-line"></div>
+                <div class="fs-14 t-center">
+                    <div class="" style="width: 100%;">
+                        <span>Don`t Have account?
+                            <p id="register-text" class="mt-7">Register Here</p>
+                        </span>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+        <div id="register-form-div" class="column-container wp-100 hide smooth">
+            <form class="column-container form mt-14">
+                <h2>Registerto BucketPay</h2>
+
+                <div>
+                    <input id="name" type="text" , placeholder="Enter Your Name">
+                </div>
+                <div>
+                    <input id="mobile" type="tel" , placeholder="Enter Your Mobile Number">
+                </div>
+                <div>
+                    <input id="password" type="password" , placeholder="Enter Your Password">
+                </div>
+                <div>
+                    <input id="UPI" type="password" , placeholder="Enter Your UPI PIN">
+                </div>
+                <div class="t-center">
+                    <button id="btn-register">Register</button>
+                </div>
+                <div id="error-message-2" class="hide">
+                    <p>Error</p>
+                </div>
+                <div class="horizontal-line"></div>
+                <div class="fs-14 t-center">
+                    <div style="width: 100%;">
+                        <span>Already have an account?
+                            <p id="login-text" class="mt-7">Login</p>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </main>
+
+
+    <script src="./javascript/authentication.js" type="module"></script>
+</body>
+
+</html>
