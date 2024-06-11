@@ -1,0 +1,60 @@
+main {
+
+    height: 100vh;
+    color: var(--text-3);
+    background-image: linear-gradient(to bottom right, var(--bg-1), var(--bg-2));
+}
+
+
+.active {
+
+    display: flex;
+}
+
+.form {
+    border: 2px solid var(--bg-1);
+    border-radius: 6px;
+    width: 33%;
+    color: var(--text-3);
+    height: 68vh;
+    justify-content: space-evenly;
+    gap: 0;
+}
+
+#register-form-div form {
+
+    background-image: linear-gradient(to bottom right, var(--bg-2), var(--bg-1));
+}
+
+.form div {
+    width: 73%;
+}
+
+form button {
+
+    width: 80px;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 2px solid var(--bg-1);
+    background-color: var(--text-3);
+    padding: 3px;
+    color: var(--text-1);
+}
+
+form button:hover {
+
+    background-color: var(--bg-1);
+    color: var(--text-3);
+}
+
+#login-text:hover,
+#register-text:hover {
+
+    color: var(--text-1);
+}
+
+span p {
+
+    text-decoration: underline;
+    cursor: pointer;
+}

@@ -4,6 +4,10 @@ const generateToken = require("../utils/generateToken")
 const hasEntry = require("../utils/hasEntry")
 const hashPassword = require("../utils/hashPassword")
 
+// render registration form
+const authenticate = (req, res) => {
+    res.render('authentication.html')
+}
 const registerUser = async (req, res) => {
 
     try {
@@ -115,5 +119,7 @@ const loginUser = async (req, res) => {
 }
 module.exports = {
 
-    registerUser, loginUser
+    registerUser,
+    loginUser,
+    authenticate
 }

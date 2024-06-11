@@ -28,8 +28,8 @@ server.listen(PORT, () => {
 
 
 // routes
-// const homeRoute = require('./routes/home.routes')
 const userRoute = require('./routes/user.routes')
+const homeRoute = require('./routes/home.routes')
 
-// app.use(homeRoute)
 app.use('/user', userRoute)
+app.use(homeRoute)
