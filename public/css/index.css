@@ -10,10 +10,43 @@ aside {
     gap: 18px;
     flex-direction: column;
     justify-content: start;
-    align-items: center;
+    align-items: start;
     overflow-y: auto;
 }
 
+.dot {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+}
+
+#add-members {
+
+    width: 30vw;
+    overflow-y: auto;
+    background: rgba(0, 135, 20, 0.45);
+    backdrop-filter: blur(74px);
+    box-shadow: 0px 8px 35px 0 rgba(0, 135, 20, 0.45);
+    border: 2px solid rgba(0, 135, 20, 0.45);
+    border-radius: 6px;
+    position: absolute;
+    top: 19%;
+    left: 40%;
+    color: var(--text-3);
+}
+
+#overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+}
+
+#add-members div {
+    width: 100%;
+}
 .chats {
     border: 2px solid var(--border-1);
     border-radius: 6px;

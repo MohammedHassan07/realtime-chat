@@ -1,4 +1,4 @@
-async function makeRequest(url, data, userToken) {
+async function makeRequest(url, data) {
 
     const BASE_URL = 'http://localhost:3000'
 

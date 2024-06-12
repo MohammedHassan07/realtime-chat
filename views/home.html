@@ -17,70 +17,99 @@
 
         <aside>
 
-            <div>
-                <h2>Users</h2>
+            <div class="wp-100 flex al-center sp-between">
+                <div>
+
+                    <h2>Users</h2>
+                </div>
+                <!-- <div class="dot">
+                    <img class="wp-100 hp-100" src="/images/dots.png" alt="">
+                </div> -->
+
+                <div>
+                    <button id="create-goup" class="btn -btn-primary">Create Group</button>
+                </div>
             </div>
+
+            <!-- chats -->
             <div class="wp-100">
                 <ul>
                     <li class="chats">
                         <div class="container justify-start al-start p-6 gap-12">
-                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt=""></div>
+                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg"
+                                    alt=""></div>
                             <div class="mt-12">
                                 <p class="fs-18">Potter</p>
                             </div>
                         </div>
-                    </li><li class="chats">
+                    </li>
+                    <li class="chats">
                         <div class="container justify-start al-start p-6 gap-12">
-                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt=""></div>
+                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg"
+                                    alt=""></div>
                             <div class="mt-12">
                                 <p class="fs-18">Potter</p>
                             </div>
                         </div>
-                    </li><li class="chats">
+                    </li>
+                    <li class="chats">
                         <div class="container justify-start al-start p-6 gap-12">
-                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt=""></div>
+                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg"
+                                    alt=""></div>
                             <div class="mt-12">
                                 <p class="fs-18">Potter</p>
                             </div>
                         </div>
-                    </li><li class="chats">
+                    </li>
+                    <li class="chats">
                         <div class="container justify-start al-start p-6 gap-12">
-                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt=""></div>
+                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg"
+                                    alt=""></div>
                             <div class="mt-12">
                                 <p class="fs-18">Potter</p>
                             </div>
                         </div>
-                    </li><li class="chats">
+                    </li>
+                    <li class="chats">
                         <div class="container justify-start al-start p-6 gap-12">
-                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt=""></div>
+                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg"
+                                    alt=""></div>
                             <div class="mt-12">
                                 <p class="fs-18">Potter</p>
                             </div>
                         </div>
-                    </li><li class="chats">
+                    </li>
+                    <li class="chats">
                         <div class="container justify-start al-start p-6 gap-12">
-                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt=""></div>
+                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg"
+                                    alt=""></div>
                             <div class="mt-12">
                                 <p class="fs-18">Potter</p>
                             </div>
                         </div>
-                    </li><li class="chats">
+                    </li>
+                    <li class="chats">
                         <div class="container justify-start al-start p-6 gap-12">
-                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt=""></div>
+                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg"
+                                    alt=""></div>
                             <div class="mt-12">
                                 <p class="fs-18">Potter</p>
                             </div>
                         </div>
-                    </li><li class="chats">
+                    </li>
+                    <li class="chats">
                         <div class="container justify-start al-start p-6 gap-12">
-                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt=""></div>
+                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg"
+                                    alt=""></div>
                             <div class="mt-12">
                                 <p class="fs-18">Potter</p>
                             </div>
                         </div>
-                    </li><li class="chats">
+                    </li>
+                    <li class="chats">
                         <div class="container justify-start al-start p-6 gap-12">
-                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt=""></div>
+                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg"
+                                    alt=""></div>
                             <div class="mt-12">
                                 <p class="fs-18">Potter</p>
                             </div>
@@ -108,13 +137,38 @@
             </div>
             <div class="container wp-100 gap-12 mt-15">
                 <textarea class="wp-100" id="input-message" placeholder="Enrter Message Here"></textarea>
-                <button id="btn-send" class="btn btn-primary">Send</button>
+                <button id="btn-send" class="btn">Send</button>
             </div>
         </main>
     </section>
 
+    <!-- create group -->
+    <div id="overlay"></div>
+    <form id="add-members" class="column-container hide">
+
+        <img id="close-add-member-form" class="close" src="./imges/close.png" alt="close">
+
+        <div class="t-center">
+            <h3>
+                Add Members 
+            </h3>
+        </div>
+
+        <div>
+            <input id="group-name" type="text" placeholder="Enter Group Name">
+        </div>
+        <div class="input-container">
+
+            <input class="input" type="tel" placeholder="Enter number">
+        </div>
+        <div>
+            <button id="btn-add-members" class="btn ">Submit</button>
+        </div>
+
+    </form>
+
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/javascript/home.js"></script>
+    <script src="/javascript/home.js" type="module"></script>
 
 </body>
 
