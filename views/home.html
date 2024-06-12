@@ -13,28 +13,105 @@
 
 <body>
 
-    <main class="vh-100">
-        <div class="title">
-            <h2>Realtime Chat App</h2>
-        </div>
-        <div class="message-container mt-12">
+    <section class="flex">
 
-            <!-- messages goes here -->
-            <div id="messages" class="messages wp-100">
+        <aside>
 
-                <div class="message right">
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, porro!</p>
+            <div>
+                <h2>Users</h2>
+            </div>
+            <div class="wp-100">
+                <ul>
+                    <li class="chats">
+                        <div class="container justify-start al-start p-6 gap-12">
+                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt=""></div>
+                            <div class="mt-12">
+                                <p class="fs-18">Potter</p>
+                            </div>
+                        </div>
+                    </li><li class="chats">
+                        <div class="container justify-start al-start p-6 gap-12">
+                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt=""></div>
+                            <div class="mt-12">
+                                <p class="fs-18">Potter</p>
+                            </div>
+                        </div>
+                    </li><li class="chats">
+                        <div class="container justify-start al-start p-6 gap-12">
+                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt=""></div>
+                            <div class="mt-12">
+                                <p class="fs-18">Potter</p>
+                            </div>
+                        </div>
+                    </li><li class="chats">
+                        <div class="container justify-start al-start p-6 gap-12">
+                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt=""></div>
+                            <div class="mt-12">
+                                <p class="fs-18">Potter</p>
+                            </div>
+                        </div>
+                    </li><li class="chats">
+                        <div class="container justify-start al-start p-6 gap-12">
+                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt=""></div>
+                            <div class="mt-12">
+                                <p class="fs-18">Potter</p>
+                            </div>
+                        </div>
+                    </li><li class="chats">
+                        <div class="container justify-start al-start p-6 gap-12">
+                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt=""></div>
+                            <div class="mt-12">
+                                <p class="fs-18">Potter</p>
+                            </div>
+                        </div>
+                    </li><li class="chats">
+                        <div class="container justify-start al-start p-6 gap-12">
+                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt=""></div>
+                            <div class="mt-12">
+                                <p class="fs-18">Potter</p>
+                            </div>
+                        </div>
+                    </li><li class="chats">
+                        <div class="container justify-start al-start p-6 gap-12">
+                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt=""></div>
+                            <div class="mt-12">
+                                <p class="fs-18">Potter</p>
+                            </div>
+                        </div>
+                    </li><li class="chats">
+                        <div class="container justify-start al-start p-6 gap-12">
+                            <div class="img-container"><img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt=""></div>
+                            <div class="mt-12">
+                                <p class="fs-18">Potter</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </aside>
 
-                    <p class="time">12:00 AM</p>
+        <main class="vh-100 ">
+            <div class="title">
+                <h2>Realtime Chat App</h2>
+            </div>
+            <div class="message-container mt-12">
+
+                <!-- messages goes here -->
+                <div id="messages" class="messages wp-100">
+
+                    <div class="message right">
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, porro!</p>
+
+                        <p class="time">12:00 AM</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container wp-60 gap-12 mt-15">
-            <textarea class="wp-100" id="input-message" placeholder="Enrter Message Here"></textarea>
-            <button id="btn-send" class="btn btn-primary">Send</button>
-        </div>
-    </main>
-
+            <div class="container wp-100 gap-12 mt-15">
+                <textarea class="wp-100" id="input-message" placeholder="Enrter Message Here"></textarea>
+                <button id="btn-send" class="btn btn-primary">Send</button>
+            </div>
+        </main>
+    </section>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="/javascript/home.js"></script>
