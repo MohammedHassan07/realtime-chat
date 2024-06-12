@@ -3,6 +3,15 @@ console.log('home.js')
 const socket = io()
 
 let messages = document.getElementById('messages')
+let chats = document.querySelectorAll('.chats')
+
+Array.from(chats).forEach(chat => {
+
+    chat.addEventListener('click', (e) => {
+        console.log(e)
+    })
+})
+
 document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('input-message').focus()
