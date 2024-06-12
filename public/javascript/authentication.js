@@ -51,7 +51,7 @@ btnLogin.addEventListener('click', async (e) => {
         window.localStorage.setItem('token', response.token)
 
         // window.history.replaceState(null, null, 'http://127.0.0.1:3000/home')
-        location.href = 'http://localhost:3000/home'
+        location.href = 'http://localhost:3000/'
     }
 
     error1.classList.remove('hide')
@@ -78,7 +78,6 @@ btnRegister.addEventListener('click', async (e) => {
         name: values[0],
         mobile: values[1],
         password: values[2],
-        pin: values[3],
     }
 
     // console.log(data)
