@@ -8,7 +8,6 @@ async function makeRequest(url, data, userToken) {
 
         headers: {
             'Content-Type': 'application/json',
-            token: userToken
         },
         body: JSON.stringify(data)
     })

@@ -4,8 +4,8 @@ const verifyJWT = async (req, res, next) => {
 
     try {
 
-        const userToken = req.headers.token
-
+        const userToken = req.cookies.token.token
+        
         if (!userToken) {
 
             res.status(401).json({

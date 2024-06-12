@@ -87,11 +87,15 @@ const loginUser = async (req, res) => {
 
             if (token.flag) {
 
+                res.cookie('token', token, {
+                    httpOnly: true,
+                    sameSite: 'strict'
+                })
+
                 res.status(200).json({
 
                     flag: true,
                     message: "Login Successfull",
-                    token: token.token
                 })
                 return
             }

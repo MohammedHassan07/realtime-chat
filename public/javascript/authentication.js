@@ -48,7 +48,6 @@ btnLogin.addEventListener('click', async (e) => {
     if (response.flag) {
 
         error1.style.color = 'green'
-        window.localStorage.setItem('token', response.token)
 
         // window.history.replaceState(null, null, 'http://127.0.0.1:3000/home')
         location.href = 'http://localhost:3000/'
