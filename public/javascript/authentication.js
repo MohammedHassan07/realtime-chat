@@ -44,7 +44,7 @@ btnLogin.addEventListener('click', async (e) => {
     // console.log(data)
     const url = '/user/login'
     const response = await makeRequest(url, data)
-
+    console.log(response)
     if (response.flag) {
 
         error1.style.color = 'green'

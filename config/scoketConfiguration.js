@@ -10,11 +10,21 @@ function configureSocketConnection(server) {
 
         // console.log('a user joined')
 
-        socket.on('send-message', (data) => {
+        socket.on('send-message', (message) => {
 
             // console.log(data)
 
-            socket.broadcast.emit('broadcast', data)
+            const date = new Date()
+            let hours = date.getHours()
+            const ampm = hours >= 12 ? 'PM' : 'AM'
+        
+            hours = hours % 12
+            hours = hours ? hours : 12
+            
+        
+            const time = `${hours}:${date.getMinutes()} ${ampm}`
+
+            socket.broadcast.emit('broadcast', {message, time})
 
             // also implement message queue to send notification to users
         })

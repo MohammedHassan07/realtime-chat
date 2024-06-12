@@ -2,6 +2,7 @@ console.log('home.js')
 
 const socket = io()
 
+let messages = document.getElementById('messages')
 document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('input-message').focus()
@@ -14,8 +15,18 @@ btnSend.addEventListener('click', (e) => {
     e.preventDefault()
 
     const inputMessage = document.getElementById('input-message').value.trim()
+    // console.log('send button', inputMessage)
 
-    appendMessage(inputMessage, 'right')
+    const date = new Date()
+    let hours = date.getHours()
+    const ampm = hours >= 12 ? 'PM' : 'AM'
+
+    hours = hours % 12
+    hours = hours ? hours : 12
+
+
+    const time = `${hours}:${date.getMinutes()} ${ampm}`
+    appendMessage({ message: inputMessage, time }, 'right')
     document.getElementById('input-message').value = ''
 
     sendMessage(inputMessage)
@@ -27,15 +38,6 @@ function appendMessage(data, position) {
     const div = document.createElement('div')
     div.classList.add('message', position)
 
-    const date = new Date()
-
-    let hours = date.getHours() % 12
-    hours = hours ? hours : 12
-    
-    const ampm = hours <= 12 ? 'PM' : 'AM'
-
-    const time = `${hours}:${date.getMinutes()} ${ampm}`
-
     const innerMarkup = `
 
         <p>${data.message}</p>
@@ -46,8 +48,8 @@ function appendMessage(data, position) {
 
     div.innerHTML = innerMarkup
 
-    document.getElementById('messages').appendChild(div)
-
+    messages.appendChild(div)
+    messages.scrollTop = messages.scrollHeight
 }
 
 function sendMessage(message) {
