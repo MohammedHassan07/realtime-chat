@@ -8,6 +8,8 @@ let messages = document.getElementById('messages')
 let chats = document.querySelectorAll('.chats')
 let bntCreateGroup = document.getElementById('create-goup')
 let addMemberForm = document.getElementById('add-members')
+let groupName;
+
 Array.from(chats).forEach(chat => {
 
     chat.addEventListener('click', (e) => {
@@ -17,7 +19,7 @@ Array.from(chats).forEach(chat => {
 
 // close create group form
 document.getElementById('overlay').addEventListener('click', () => {
-    
+
     addMemberForm.classList.add('hide')
     document.getElementById('overlay').style.zIndex = -1;
 })
@@ -41,18 +43,18 @@ const btnAddMember = document.getElementById('btn-add-members')
 btnAddMember.addEventListener('click', async (e) => {
     e.preventDefault()
 
-    console.log(bucketName, bucketId)
-
     const inputFields = document.querySelectorAll('.input')
 
-    bucketName = document.getElementById('group-name').value
+    groupName = document.getElementById('group-name').value
 
     const memberNumbers = Array.from(inputFields)
         .map(input => input.value)
         .filter(value => value !== "" && value !== undefined)
 
 
-    const response = await makeRequest(url, memberNumbers)
+    console.log(memberNumbers)
+    const url = ''
+    const response = await makeRequest(url, {memberNumbers, groupName})
     console.log(response)
 
     if (response.flag) {

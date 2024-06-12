@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const userModel = require('../models/user.model')
 
 const verifyJWT = async (req, res, next) => {
 
@@ -26,7 +27,10 @@ const verifyJWT = async (req, res, next) => {
         }
 
         // console.log('verify jwt --> ', verifiedToken)
-        req.userId = verifiedToken
+        // req.userId = verifiedToken
+
+        const user = await userModel.findOne({verifiedToken}).select('-password') 
+        req.user = user
         next()
     } catch (error) {
 

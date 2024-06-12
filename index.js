@@ -32,6 +32,8 @@ server.listen(PORT, () => {
 // routes
 const userRoute = require('./routes/user.routes')
 const homeRoute = require('./routes/home.routes')
+const groupRoute = require('./routes/group.routes')
 
 app.use('/user', userRoute)
 app.use(homeRoute)
+app.use('/group', groupRoute)
