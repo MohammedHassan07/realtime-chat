@@ -166,15 +166,16 @@ async function renderChats(url, cotnainerId) {
 
 }
 
-// click on chats
+// click on chats --> get all the message of that chat
 async function clickOnChat(e) {
 
     // console.log(e)
     console.log(e.target.getAttribute('id'))
 
     const chatId = e.target.getAttribute('id')
-    const url = '/messages/get-messages'
-    const response = await makeRequest(url, { chatId })
+    const url = `/messages/get-messages/${chatId}`
+    
+    const response = await makeGetRequest(url)
 
     console.log(response)
 

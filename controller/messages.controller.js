@@ -1,5 +1,4 @@
 const messageModel = require("../models/message.model")
-const userModel = require("../models/user.model")
 
 const getMessages = async (req, res) => {
 
@@ -7,7 +6,7 @@ const getMessages = async (req, res) => {
 
         const user = req.user
 
-        const { chatId } = req.body.chatId
+        const chatId = req.params.chatId
 
         const messages = await messageModel.find({ senderId: user._Id, recieverId: chatId })
 

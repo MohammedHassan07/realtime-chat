@@ -4,6 +4,6 @@ const { getMessages } = require('../controller/messages.controller')
 
 const route = express.Router()
 
-route.post('/get-messages', verifyJWT, getMessages)
+route.get('/get-messages/:chatId', verifyJWT, getMessages)
 
 module.exports = route
