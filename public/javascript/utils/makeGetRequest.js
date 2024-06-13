@@ -1,4 +1,4 @@
-async function makeGetRequest(url, userToken) {
+async function makeGetRequest(url) {
 
     const BASE_URL = 'http://localhost:3000'
     const res = await fetch(`${BASE_URL}${url}`, {
@@ -7,7 +7,6 @@ async function makeGetRequest(url, userToken) {
 
         headers: {
             'Content-Type': 'application/json',
-            token: userToken
         }
     })
 

@@ -33,7 +33,11 @@ server.listen(PORT, () => {
 const userRoute = require('./routes/user.routes')
 const homeRoute = require('./routes/home.routes')
 const groupRoute = require('./routes/group.routes')
+const chatsRoutes = require('./routes/chats.routes')
+const messagesRoutes = require('./routes/messages.routes')
 
 app.use('/user', userRoute)
 app.use(homeRoute)
 app.use('/group', groupRoute)
+app.use('/chats', chatsRoutes)
+app.use('/messages', messagesRoutes)

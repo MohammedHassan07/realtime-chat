@@ -6,7 +6,8 @@ const verifyJWT = async (req, res, next) => {
     try {
 
         const userToken = req.cookies.token.token
-        
+        // console.log(userToken)
+
         if (!userToken) {
 
             res.status(401).json({
@@ -29,7 +30,7 @@ const verifyJWT = async (req, res, next) => {
         // console.log('verify jwt --> ', verifiedToken)
         // req.userId = verifiedToken
 
-        const user = await userModel.findOne({verifiedToken}).select('-password') 
+        const user = await userModel.findOne({ mobile: verifiedToken }).select('-password')
         req.user = user
         next()
     } catch (error) {

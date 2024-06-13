@@ -1,21 +1,34 @@
 console.log('home.js')
 
 import makeRequest from './utils/makeRequest.js'
+import makeGetRequest from './utils/makeGetRequest.js'
 
 const socket = io()
 
 let messages = document.getElementById('messages')
-let chats = document.querySelectorAll('.chats')
 let bntCreateGroup = document.getElementById('create-goup')
 let addMemberForm = document.getElementById('add-members')
+let chats;
 let groupName;
 
-Array.from(chats).forEach(chat => {
 
-    chat.addEventListener('click', (e) => {
-        console.log(e)
+// load chats in aside container
+document.addEventListener('DOMContentLoaded', async (e) => {
+
+    await renderChats('/chats/chats', 'chats-list')
+
+    // click on chats
+    chats = document.querySelectorAll('.chats')
+    Array.from(chats).forEach(chat => {
+
+        chat.addEventListener('click', async (e) => {
+
+            await clickOnChat(e)
+        })
     })
 })
+
+
 
 // close create group form
 document.getElementById('overlay').addEventListener('click', () => {
@@ -54,7 +67,7 @@ btnAddMember.addEventListener('click', async (e) => {
 
     console.log(memberNumbers)
     const url = ''
-    const response = await makeRequest(url, {memberNumbers, groupName})
+    const response = await makeRequest(url, { memberNumbers, groupName })
     console.log(response)
 
     if (response.flag) {
@@ -116,6 +129,55 @@ function appendMessage(data, position) {
 function sendMessage(message) {
 
     socket.emit('send-message', message)
+}
+
+// render chats
+async function renderChats(url, cotnainerId) {
+
+    let chatsList = document.getElementById(cotnainerId)
+    chatsList.innerHTML = ''
+
+    const response = await makeGetRequest(url)
+
+    // console.log(response)
+
+    Array.from(response.chats).forEach(chat => {
+
+        const li = document.createElement('li')
+        li.classList.add('chats')
+
+        const innerMarkup = `
+            <div id = "${chat._id}" class="container justify-start al-start p-6 gap-12">
+                <div class="img-container">
+                    <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg"
+                        alt="">
+                </div>
+                <div class="mt-12">
+                    <p class="fs-18">${chat.name}</p>
+                </div>
+            </div>
+
+        `
+
+        li.innerHTML = innerMarkup
+        chatsList.appendChild(li)
+    })
+
+
+}
+
+// click on chats
+async function clickOnChat(e) {
+
+    // console.log(e)
+    console.log(e.target.getAttribute('id'))
+
+    const chatId = e.target.getAttribute('id')
+    const url = '/messages/get-messages'
+    const response = await makeRequest(url, { chatId })
+
+    console.log(response)
+
 }
 
 // function to create new input field
