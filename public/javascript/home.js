@@ -150,15 +150,16 @@ async function renderChats(url, cotnainerId) {
 
         const li = document.createElement('li')
         li.classList.add('chats')
+        li.setAttribute('id', `${chat._id}`)
 
         const innerMarkup = `
-            <div id = "${chat._id}" class="container justify-start al-start p-6 gap-12">
+            <div id="${chat._id}" class="container justify-start al-start p-6 gap-12">
                 <div class="img-container">
                     <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg"
                         alt="">
                 </div>
                 <div class="mt-12">
-                    <p class="fs-18">${chat.name}</p>
+                    <p id="${chat._id}" class="fs-18">${chat.name}</p>
                 </div>
             </div>
 
@@ -178,6 +179,8 @@ async function clickOnChat(e) {
     console.log(e.target.getAttribute('id'))
 
     const chatId = e.target.getAttribute('id')
+
+    console.log(e, chatId)
     const url = `/messages/get-messages/${chatId}`
 
     const response = await makeGetRequest(url)

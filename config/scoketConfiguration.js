@@ -19,10 +19,7 @@ function configureSocketConnection(server) {
     // socket connection
     io.on('connection', (socket) => {
 
-        console.log('a user joined')
-
         socket.on('send-message', (message) => {
-
 
             const date = new Date()
             let hours = date.getHours()
@@ -30,7 +27,6 @@ function configureSocketConnection(server) {
 
             hours = hours % 12
             hours = hours ? hours : 12
-
 
             const time = `${hours}:${date.getMinutes()} ${ampm}`
 
