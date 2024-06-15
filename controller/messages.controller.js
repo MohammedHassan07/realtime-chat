@@ -1,4 +1,22 @@
-const messageModel = require("../models/message.model")
+const messageModel = require('../models/message.model')
+
+const saveMessages = async ({ sender, data }) => {
+
+    try {
+
+        // console.log(data)
+
+        const message = new messageModel({ senderId: sender._id, recieverId: data.recieverId, message: data.message })
+
+        await message.save()
+
+        // if (savedMessage) console.log(savedMessage)
+
+    } catch (error) {
+
+        console.log('save messages --> ', error)
+    }
+}
 
 const getMessages = async (req, res) => {
 
@@ -8,7 +26,18 @@ const getMessages = async (req, res) => {
 
         const chatId = req.params.chatId
 
-        const messages = await messageModel.find({ senderId: user._Id, recieverId: chatId })
+        if (user._id == chatId) return
+
+
+        const messages = await messageModel.find(
+            {
+                $or: [
+                    { senderId: user._id, recieverId: chatId },
+                    { senderId: chatId, recieverId: user._id }
+                ]
+            })
+
+        console.log('get messages --> ', messages)
 
         if (!messages) return res.status(404).json({ flag: false, message: 'No chat Found' })
 
@@ -23,5 +52,6 @@ const getMessages = async (req, res) => {
 
 module.exports = {
 
-    getMessages
+    getMessages,
+    saveMessages
 }

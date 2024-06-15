@@ -17,6 +17,6 @@ const messageSchema = new Schema({
 
 }, {timestamps:true})
 
-const messageModel = model('chat', messageSchema)
+const messageModel = model('Message', messageSchema)
 
 module.exports = messageModel

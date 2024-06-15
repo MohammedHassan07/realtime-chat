@@ -15,6 +15,7 @@ let bntCreateGroup = document.getElementById('create-goup')
 let addMemberForm = document.getElementById('add-members')
 let chats;
 let groupName;
+let recieverId;
 
 
 // load chats in aside container
@@ -105,10 +106,10 @@ btnSend.addEventListener('click', (e) => {
 
 
     const time = `${hours}:${date.getMinutes()} ${ampm}`
-    appendMessage({ message: inputMessage, time }, 'right')
+    appendMessage({ message: inputMessage, time, recieverId }, 'right')
     document.getElementById('input-message').value = ''
 
-    sendMessage(inputMessage)
+    sendMessage({ message: inputMessage, recieverId })
     document.getElementById('input-message').focus()
 })
 
@@ -131,9 +132,10 @@ function appendMessage(data, position) {
     messages.scrollTop = messages.scrollHeight
 }
 
-function sendMessage(message) {
+function sendMessage(data) {
 
-    socket.emit('send-message', message)
+    console.log(data)
+    socket.emit('send-message', data)
 }
 
 // render chats
@@ -179,8 +181,9 @@ async function clickOnChat(e) {
     console.log(e.target.getAttribute('id'))
 
     const chatId = e.target.getAttribute('id')
+    recieverId = chatId
 
-    console.log(e, chatId)
+    console.log(chatId, recieverId)
     const url = `/messages/get-messages/${chatId}`
 
     const response = await makeGetRequest(url)
