@@ -3,7 +3,12 @@ console.log('home.js')
 import makeRequest from './utils/makeRequest.js'
 import makeGetRequest from './utils/makeGetRequest.js'
 
-const socket = io()
+const socket = io({
+    withCredentials: true,
+    extraHeaser: {
+        'Authorization': document.cookie
+    }
+})
 
 let messages = document.getElementById('messages')
 let bntCreateGroup = document.getElementById('create-goup')
@@ -174,7 +179,7 @@ async function clickOnChat(e) {
 
     const chatId = e.target.getAttribute('id')
     const url = `/messages/get-messages/${chatId}`
-    
+
     const response = await makeGetRequest(url)
 
     console.log(response)
