@@ -16,6 +16,22 @@ let addMemberForm = document.getElementById('add-members')
 let chats;
 let groupName;
 let recieverId;
+let chatId;
+let userName;
+let senderId
+let time;
+
+// function to create new input field
+function addNewInput(inputField) {
+
+    const div = document.createElement('div')
+
+    div.innerHTML =
+        `
+            <input class="input" type="number" placeholder="Enter number">
+        `
+    addMemberForm.insertBefore(div, inputField.nextElementSibling)
+}
 
 
 // load chats in aside container
@@ -29,12 +45,26 @@ document.addEventListener('DOMContentLoaded', async (e) => {
 
         chat.addEventListener('click', async (e) => {
 
-            await clickOnChat(e)
+            document.getElementById('messages').innerHTML = ''
+            const response = await clickOnChat(e)
+            console.log(response)
+
+            senderId = response.messages[0].senderId
+            recieverId = response.messages[0].recieverId
+            let position;
+            if (senderId !== recieverId) {
+
+                // resolve the position problem
+                const messages = response.messages
+                Array.from(messages).forEach(message => {
+                    
+                    time = message.createdAt
+                    appendMessage({ message:message.message, time }, 'right')
+                });
+            }
         })
     })
 })
-
-
 
 // close create group form
 document.getElementById('overlay').addEventListener('click', () => {
@@ -86,7 +116,6 @@ btnAddMember.addEventListener('click', async (e) => {
 document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('input-message').focus()
-
 })
 
 const btnSend = document.getElementById('btn-send')
@@ -97,16 +126,8 @@ btnSend.addEventListener('click', (e) => {
     const inputMessage = document.getElementById('input-message').value.trim()
     // console.log('send button', inputMessage)
 
-    const date = new Date()
-    let hours = date.getHours()
-    const ampm = hours >= 12 ? 'PM' : 'AM'
-
-    hours = hours % 12
-    hours = hours ? hours : 12
-
-
-    const time = `${hours}:${date.getMinutes()} ${ampm}`
-    appendMessage({ message: inputMessage, time, recieverId }, 'right')
+    getTime()
+    appendMessage({ message: inputMessage, time }, 'right')
     document.getElementById('input-message').value = ''
 
     sendMessage({ message: inputMessage, recieverId })
@@ -166,7 +187,6 @@ async function renderChats(url, cotnainerId) {
             </div>
 
         `
-
         li.innerHTML = innerMarkup
         chatsList.appendChild(li)
     })
@@ -177,32 +197,32 @@ async function renderChats(url, cotnainerId) {
 // click on chats --> get all the message of that chat
 async function clickOnChat(e) {
 
-    // console.log(e)
-    console.log(e.target.getAttribute('id'))
+    // console.log(e.target.getAttribute('id'))
 
-    const chatId = e.target.getAttribute('id')
-    recieverId = chatId
+    chatId = e.target.getAttribute('id')
 
-    console.log(chatId, recieverId)
+    userName = e.target.innerText
+    document.getElementById('user-name').innerText = userName
+
     const url = `/messages/get-messages/${chatId}`
 
     const response = await makeGetRequest(url)
 
-    console.log(response)
-
+    return response
 }
 
-// function to create new input field
-function addNewInput(inputField) {
 
-    const div = document.createElement('div')
+function getTime() {
 
-    div.innerHTML =
-        `
-            <input class="input" type="number" placeholder="Enter number">
-        `
-    addMemberForm.insertBefore(div, inputField.nextElementSibling)
+    const date = new Date()
+    let hours = date.getHours()
+    const ampm = hours >= 12 ? 'PM' : 'AM'
+
+    hours = hours % 12
+    hours = hours ? hours : 12
+    time = `${hours}:${date.getMinutes()} ${ampm}`
 }
+
 
 socket.on('broadcast', (data) => {
 
