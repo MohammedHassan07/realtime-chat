@@ -37,6 +37,17 @@ const getMessages = async (req, res) => {
                 ]
             })
 
+        let pos;
+        const userId = user._id
+        Array.from(messages).forEach(message => {
+
+            if (userId == message.senderId) pos = 'right'
+            else pos = 'left'
+
+            message.position = pos
+            console.log('message position -->', message['position'])
+        });
+
         console.log('get messages --> ', messages)
 
         if (!messages) return res.status(404).json({ flag: false, message: 'No chat Found' })

@@ -51,7 +51,6 @@ document.addEventListener('DOMContentLoaded', async (e) => {
 
             senderId = response.messages[0].senderId
             recieverId = response.messages[0].recieverId
-            let position;
             if (senderId !== recieverId) {
 
                 // resolve the position problem
@@ -59,7 +58,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
                 Array.from(messages).forEach(message => {
                     
                     time = message.createdAt
-                    appendMessage({ message:message.message, time }, 'right')
+                    appendMessage({ message:message.message, time }, message.position)
                 });
             }
         })
