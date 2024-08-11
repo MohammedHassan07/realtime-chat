@@ -4,7 +4,7 @@ const saveMessages = async ({ sender, data }) => {
 
     try {
 
-        // console.log(data)
+        // console.log(sender, data)
 
         const message = new messageModel({ senderId: sender._id, recieverId: data.recieverId, message: data.message })
 
@@ -24,35 +24,39 @@ const getMessages = async (req, res) => {
 
         const user = req.user
 
+        const userId = user._id
         const chatId = req.params.chatId
 
         if (user._id == chatId) return
 
-
-        const messages = await messageModel.find(
+        let messages = await messageModel.find(
             {
                 $or: [
-                    { senderId: user._id, recieverId: chatId },
-                    { senderId: chatId, recieverId: user._id }
+                    { senderId: userId, recieverId: chatId },
+                    { senderId: chatId, recieverId: userId }
                 ]
-            })
+            }).lean()
 
-        let pos;
-        const userId = user._id
-        Array.from(messages).forEach(message => {
+        messages = messages.map(message => {
+            // console.log('IDs --> ', userId, message.recieverId)
+            if (chatId === message.recieverId.toString()) {
 
-            if (userId == message.senderId) pos = 'right'
-            else pos = 'left'
+                return {
+                    ...message,
+                    position: 'right'
+                }
+            }
 
-            message.position = pos
-            console.log('message position -->', message['position'])
+            return {
+                ...message,
+                position: 'left'
+            }
         });
-
-        console.log('get messages --> ', messages)
 
         if (!messages) return res.status(404).json({ flag: false, message: 'No chat Found' })
 
-        res.status(200).json({ flag: true, messages })
+        console.log('messages-->', messages)
+        return res.status(200).json({ flag: true, messages })
 
     } catch (error) {
 

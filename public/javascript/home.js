@@ -47,18 +47,20 @@ document.addEventListener('DOMContentLoaded', async (e) => {
 
             document.getElementById('messages').innerHTML = ''
             const response = await clickOnChat(e)
-            console.log(response)
+
+            // console.log(response)
+            // console.log('load message', recieverId)
 
             senderId = response.messages[0].senderId
             recieverId = response.messages[0].recieverId
             if (senderId !== recieverId) {
 
-                // resolve the position problem
                 const messages = response.messages
                 Array.from(messages).forEach(message => {
-                    
+
+                    // console.log(message)
                     time = message.createdAt
-                    appendMessage({ message:message.message, time }, message.position)
+                    appendMessage({ message: message.message, time }, message.position)
                 });
             }
         })
@@ -130,6 +132,7 @@ btnSend.addEventListener('click', (e) => {
     document.getElementById('input-message').value = ''
 
     sendMessage({ message: inputMessage, recieverId })
+    console.log({ message: inputMessage, recieverId })
     document.getElementById('input-message').focus()
 })
 
@@ -198,12 +201,13 @@ async function clickOnChat(e) {
 
     // console.log(e.target.getAttribute('id'))
 
-    chatId = e.target.getAttribute('id')
+    recieverId = e.target.getAttribute('id')
+    console.log('click chat', recieverId)
 
     userName = e.target.innerText
     document.getElementById('user-name').innerText = userName
 
-    const url = `/messages/get-messages/${chatId}`
+    const url = `/messages/get-messages/${recieverId}`
 
     const response = await makeGetRequest(url)
 
