@@ -3,6 +3,7 @@ console.log('home.js')
 import makeRequest from './utils/makeRequest.js'
 import makeGetRequest from './utils/makeGetRequest.js'
 
+// socket connection
 const socket = io({
     withCredentials: true,
     extraHeaser: {
@@ -32,7 +33,6 @@ function addNewInput(inputField) {
         `
     addMemberForm.insertBefore(div, inputField.nextElementSibling)
 }
-
 
 // load chats in aside container, also get the messages when clicked on any perticular chat
 document.addEventListener('DOMContentLoaded', async (e) => {
@@ -122,11 +122,13 @@ btnAddMember.addEventListener('click', async (e) => {
     }
 })
 
+// focus the message  input on load 
 document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('input-message').focus()
 })
 
+// append message and send message
 const btnSend = document.getElementById('btn-send')
 btnSend.addEventListener('click', (e) => {
 
@@ -144,6 +146,7 @@ btnSend.addEventListener('click', (e) => {
     document.getElementById('input-message').focus()
 })
 
+// append message in chat window
 function appendMessage(data, position) {
 
     // console.log(data, position)
@@ -164,6 +167,7 @@ function appendMessage(data, position) {
     messages.scrollTop = messages.scrollHeight
 }
 
+// function to send message
 function sendMessage(data) {
 
     console.log(data)
@@ -223,7 +227,7 @@ async function clickOnChat(e) {
     return response
 }
 
-
+// function to get the time
 function getTime(date = new Date()) {
 
     const dateTime = new Date(date)
@@ -235,7 +239,7 @@ function getTime(date = new Date()) {
     time = `${hours}:${dateTime.getMinutes()} ${ampm}`
 }
 
-
+// socket to broadcast the message
 socket.on('broadcast', (data) => {
 
     appendMessage(data, 'left')

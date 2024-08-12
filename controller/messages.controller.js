@@ -1,5 +1,6 @@
 const messageModel = require('../models/message.model')
 
+// save the messages in MongoDB
 const saveMessages = async ({ sender, data }) => {
 
     try {
@@ -18,6 +19,7 @@ const saveMessages = async ({ sender, data }) => {
     }
 }
 
+// fetch the messages from MongoDB
 const getMessages = async (req, res) => {
 
     try {
@@ -35,7 +37,7 @@ const getMessages = async (req, res) => {
                     { senderId: userId, recieverId: chatId },
                     { senderId: chatId, recieverId: userId }
                 ]
-            }).lean()
+            }).lean()   // lean() is used to fetch the document only, if not used mongodb will return some other text fields also
 
         if (!messages) return res.status(404).json({ flag: false, message: 'No chat Found' })
 
