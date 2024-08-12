@@ -25,6 +25,7 @@ function configureSocketConnection(server) {
             const sender = socket.user
 
             // console.log('socket send-message --> ', sender, data)
+            // console.log('socket send-message --> ', data)
            
             const date = new Date()
             let hours = date.getHours()

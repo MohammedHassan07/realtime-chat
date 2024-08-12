@@ -45,27 +45,49 @@ document.addEventListener('DOMContentLoaded', async (e) => {
 
         chat.addEventListener('click', async (e) => {
 
+            // chatId = document.getAttribute('id')
             document.getElementById('messages').innerHTML = ''
             const response = await clickOnChat(e)
 
-            console.log(response)
-            // console.log('load message', recieverId)
+            // console.log(response)
 
             senderId = response.messages[0].senderId
-            recieverId = response.messages[0].recieverId
-            if (senderId !== recieverId) {
+            // recieverId = response.messages[0].recieverId
+
+            if (senderId !== chatId) {
 
                 const messages = response.messages.map(message => {
 
-                    chatId === message.recieverId.toString() ?
-                        message = {
-                            ...message,
-                            position: 'right'
-                        } :
-                        message = {
-                            ...message,
-                            position: 'left'
-                        }
+                    // console.log(chatId)
+                    // if (recieverId === message.recieverId.toString()) {
+
+                    //     return {
+                    //         ...message,
+                    //         position: 'right'
+
+                    //     }
+                    // } else {
+
+                    //     return {
+                    //         ...message,
+                    //         position: 'left'
+                    //     }
+                    // }
+
+                    recieverId === message.recieverId.toString() ? message = {
+                        ...message,
+                        position: 'right'
+                    } : message = {
+                        ...message,
+                        position: 'left'
+
+                    }
+
+                    return message
+                })
+
+                messages.forEach(message => {
+                    // console.log(message)
 
                     getTime(message.createdAt)
                     appendMessage({ message: message.message, time }, message.position)
