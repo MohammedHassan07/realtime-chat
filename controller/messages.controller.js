@@ -37,25 +37,9 @@ const getMessages = async (req, res) => {
                 ]
             }).lean()
 
-        messages = messages.map(message => {
-            // console.log('IDs --> ', userId, message.recieverId)
-            if (chatId === message.recieverId.toString()) {
-
-                return {
-                    ...message,
-                    position: 'right'
-                }
-            }
-
-            return {
-                ...message,
-                position: 'left'
-            }
-        });
-
         if (!messages) return res.status(404).json({ flag: false, message: 'No chat Found' })
 
-        console.log('messages-->', messages)
+        // console.log('messages-->', messages)
         return res.status(200).json({ flag: true, messages })
 
     } catch (error) {

@@ -34,7 +34,7 @@ function addNewInput(inputField) {
 }
 
 
-// load chats in aside container
+// load chats in aside container, also get the messages when clicked on any perticular chat
 document.addEventListener('DOMContentLoaded', async (e) => {
 
     await renderChats('/chats/chats', 'chats-list')
@@ -48,20 +48,28 @@ document.addEventListener('DOMContentLoaded', async (e) => {
             document.getElementById('messages').innerHTML = ''
             const response = await clickOnChat(e)
 
-            // console.log(response)
+            console.log(response)
             // console.log('load message', recieverId)
 
             senderId = response.messages[0].senderId
             recieverId = response.messages[0].recieverId
             if (senderId !== recieverId) {
 
-                const messages = response.messages
-                Array.from(messages).forEach(message => {
+                const messages = response.messages.map(message => {
 
-                    // console.log(message)
-                    time = message.createdAt
+                    chatId === message.recieverId.toString() ?
+                        message = {
+                            ...message,
+                            position: 'right'
+                        } :
+                        message = {
+                            ...message,
+                            position: 'left'
+                        }
+
+                    getTime(message.createdAt)
                     appendMessage({ message: message.message, time }, message.position)
-                });
+                })
             }
         })
     })
@@ -138,6 +146,8 @@ btnSend.addEventListener('click', (e) => {
 
 function appendMessage(data, position) {
 
+    // console.log(data, position)
+
     const div = document.createElement('div')
     div.classList.add('message', position)
 
@@ -148,7 +158,6 @@ function appendMessage(data, position) {
         
         <p class="time">${data.time}</p>
     `
-
     div.innerHTML = innerMarkup
 
     messages.appendChild(div)
@@ -215,15 +224,15 @@ async function clickOnChat(e) {
 }
 
 
-function getTime() {
+function getTime(date = new Date()) {
 
-    const date = new Date()
-    let hours = date.getHours()
+    const dateTime = new Date(date)
+    let hours = dateTime.getHours()
     const ampm = hours >= 12 ? 'PM' : 'AM'
 
     hours = hours % 12
     hours = hours ? hours : 12
-    time = `${hours}:${date.getMinutes()} ${ampm}`
+    time = `${hours}:${dateTime.getMinutes()} ${ampm}`
 }
 
 
