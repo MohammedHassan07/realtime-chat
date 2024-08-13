@@ -532,6 +532,7 @@ input[type=number] {
 
 #error-message-2 {
     margin-bottom: -6px;
+    margin-top: 20px;
     color: var(--text-3);
     font-size: 14px;
 }
