@@ -20,13 +20,22 @@ function configureSocketConnection(server) {
     // socket connection
     io.on('connection', (socket) => {
 
+        socket.on('login', () => {
+
+            userId = socket.user._id.toString()
+            socket.userId = userId
+            socket.join(userId)
+        })
+
         socket.on('send-message', async (data) => {
 
             const sender = socket.user
+            const senderId = sender._id.toString()
+            const recieverId = data.recieverId
 
-            // console.log('socket send-message --> ', sender, data)
+            console.log('socket send-message --> ', senderId, recieverId, data.message)
             // console.log('socket send-message --> ', data)
-           
+
             const date = new Date()
             let hours = date.getHours()
             const ampm = hours >= 12 ? 'PM' : 'AM'
@@ -36,9 +45,11 @@ function configureSocketConnection(server) {
 
             const time = `${hours}:${date.getMinutes()} ${ampm}`
 
-            socket.broadcast.emit('broadcast', { message: data.message, time })
+            // socket.broadcast.emit('broadcast', { message: data.message, time })
 
-            await saveMessages({sender, data})
+            io.to(recieverId).emit('recieve-message', { message: data.message, time })
+
+            await saveMessages({ sender, data })
 
         })
     })
