@@ -102,21 +102,21 @@ const loginUser = async (req, res) => {
 
             res.status(401).json({
                 error: token.error,
-                messags: token.message
+                message: token.message
             })
             return
         }
 
         res.status(401).json({
             error: "Unauthorized",
-            messags: "Invalid credentials. Please check your username and password and try again."
+            message: "Please check your username and password and try again."
         })
         return
     }
 
     res.status(401).json({
         error: "Unauthorized",
-        messags: "Invalid credentials. Please check your username and password and try again."
+        message: "Please check your username and password and try again."
     })
     return
 

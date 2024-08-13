@@ -44,23 +44,31 @@ btnLogin.addEventListener('click', async (e) => {
     // console.log(data)
     const url = '/user/login'
     const response = await makeRequest(url, data)
-    console.log(response)
-    if (response.flag) {
 
-        error1.style.color = 'green'
+    console.log(response.error)
 
-        // window.history.replaceState(null, null, 'http://127.0.0.1:3000/home')
-        location.href = 'http://localhost:3000/'
+    if (response.error) {
+
+
+        error1.classList.remove('hide')
+
+        setTimeout(() => {
+            error1.classList.add('hide')
+        }, 2000)
+
+        console.log(response)
+
+        error1.innerHTML = `<p>
+        ${response.message}
+        </p>`
+
+        return
     }
 
-    error1.classList.remove('hide')
-    setTimeout(() => {
-        error1.classList.add('hide')
-    }, 2000)
+    error1.style.color = 'green'
+    // window.history.replaceState(null, null, 'http://127.0.0.1:3000/home')
+    location.href = 'http://localhost:3000/'
 
-    error1.innerHTML = `<p>
-    ${response.message}
-    </p>`
 })
 
 // register user

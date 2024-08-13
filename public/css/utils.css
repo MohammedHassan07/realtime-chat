@@ -524,15 +524,15 @@ input[type=number] {
 
 #error-message {
     margin-bottom: -24px;
-    margin-top: -16px;
+    margin-top: 16px;
     font-size: 14px;
-    color: red;
+    color: var(--text-3);
 
 }
 
 #error-message-2 {
     margin-bottom: -6px;
-    color: red;
+    color: var(--text-3);
     font-size: 14px;
 }
 
