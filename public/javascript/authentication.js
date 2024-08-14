@@ -46,10 +46,9 @@ btnLogin.addEventListener('click', async (e) => {
     const url = '/user/login'
     const response = await makeRequest(url, data)
 
-    console.log(response.error)
+    console.log(response)
 
     if (response.error) {
-
 
         error1.classList.remove('hide')
 
@@ -67,6 +66,7 @@ btnLogin.addEventListener('click', async (e) => {
     }
 
     error1.style.color = 'green'
+    window.localStorage.setItem('userName', response.userName)
     // window.history.replaceState(null, null, 'http://127.0.0.1:3000/home')
     location.href = 'http://localhost:3000/'
 

@@ -94,6 +94,7 @@ const loginUser = async (req, res) => {
 
                 res.status(200).json({
 
+                    userName: entryData.data.name,
                     flag: true,
                     message: "Login Successfull",
                 })
