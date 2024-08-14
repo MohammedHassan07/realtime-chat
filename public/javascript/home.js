@@ -237,7 +237,7 @@ async function clickOnChatTogetMessages(e) {
 }
 
 // socket to broadcast the message
-socket.on('ecieve-message', (data) => {
+socket.on('recieve-message', (data) => {
 
     appendMessage(data, 'left')
 })

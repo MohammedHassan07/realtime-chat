@@ -1,6 +1,7 @@
 const socketIo = require('socket.io')
 const verifySocketJWT = require('../middleware/verifySocketJWT')
 const { saveMessages } = require('../controller/messages.controller')
+const getTime = require('../utils/getTime')
 
 function configureSocketConnection(server) {
 
@@ -18,32 +19,29 @@ function configureSocketConnection(server) {
     })
 
     // socket connection
+    let users = {};
     io.on('connection', (socket) => {
+
+        const userId = socket.user._id.toString()
+
+        users[userId] = socket.id
+        // console.log('users --> ', users)
 
         socket.on('send-message', async (data) => {
 
             const sender = socket.user
+            const recieverId = data.recieverId
+            console.log(recieverId, sender._id)
 
-            // console.log('socket send-message --> ', sender, data)
-            // console.log('socket send-message --> ', data)
-           
-            const date = new Date()
-            let hours = date.getHours()
-            const ampm = hours >= 12 ? 'PM' : 'AM'
+            const time = getTime()
 
-            hours = hours % 12
-            hours = hours ? hours : 12
+            io.to(users[recieverId]).emit('recieve-message', { message: data.message, time })
 
-            const time = `${hours}:${date.getMinutes()} ${ampm}`
+            // socket.broadcast.emit('recieve-message', { message: data.message, time })
 
-            socket.broadcast.emit('broadcast', { message: data.message, time })
-
-            await saveMessages({sender, data})
-
+            await saveMessages({ sender, data })
         })
     })
-
-
 }
 
 module.exports = configureSocketConnection

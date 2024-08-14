@@ -28,7 +28,7 @@ const getMessages = async (req, res) => {
 
         const userId = user._id
         const chatId = req.params.chatId
-        console.log('get message --> ', chatId, userId)
+        // console.log('get message --> ', chatId, userId)
 
         if (user._id == chatId) return
 

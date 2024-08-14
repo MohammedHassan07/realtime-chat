@@ -7,7 +7,7 @@ function getTime() {
     hours = hours % 12
     hours = hours ? hours : 12
 
-    console.log(`time: ${hours}:${dateTime.getMinutes()} ${ampm}`)
+    // console.log(`time: ${hours}:${dateTime.getMinutes()} ${ampm}`)
     return `${hours}:${dateTime.getMinutes()} ${ampm}`
 }
 
