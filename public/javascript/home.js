@@ -20,7 +20,9 @@ let groupName;
 let recieverId;
 let chatId;
 let userName;
-let senderId
+
+user = document.getElementById('user')
+user.innerText = localStorage.getItem('userName')
 
 // function to create new input field
 function addNewInput(inputField) {
@@ -53,12 +55,16 @@ document.addEventListener('DOMContentLoaded', async (e) => {
             document.getElementById('messages').innerHTML = ''
             const response = await clickOnChatTogetMessages(e)
 
-            senderId = response.messages[0].senderId
-            // console.log(senderId, chatId)
+            const sender = response.messages[0].senderId.toString()
+            const reciever = response.messages[0].recieverId.toString()
+
+            // console.log(senderId, chatId, recieverId)
+            // console.log(response)
 
             // update the position of messages
-            if (senderId !== chatId) {
+            if (reciever !== chatId || sender !== chatId) {
 
+                // console.log('in conditon')
                 const messages = response.messages.map(message => {
 
                     chatId === message.recieverId.toString() ? message = {
@@ -148,8 +154,9 @@ btnSend.addEventListener('click', (e) => {
     appendMessage({ message: inputMessage, time }, 'right')
     document.getElementById('input-message').value = ''
 
+    // console.log(recieverId)
     sendMessage({ message: inputMessage, recieverId })
-    console.log({ message: inputMessage, recieverId })
+    // console.log({ message: inputMessage, recieverId })
     document.getElementById('input-message').focus()
 })
 
@@ -228,8 +235,6 @@ async function clickOnChatTogetMessages(e) {
 
     return response
 }
-
-
 
 // socket to broadcast the message
 socket.on('ecieve-message', (data) => {
