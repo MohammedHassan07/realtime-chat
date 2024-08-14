@@ -10,7 +10,6 @@ const socket = io({
         'Authorization': document.cookie
     }
 })
-socket.emit('login', document.cookie)
 
 let messages = document.getElementById('messages')
 let bntCreateGroup = document.getElementById('create-goup')
@@ -50,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
             document.getElementById('messages').innerHTML = ''
             const response = await clickOnChat(e)
 
-            console.log(response)
+            // console.log(response)
 
             senderId = response.messages[0].senderId
             // recieverId = response.messages[0].recieverId
@@ -58,6 +57,22 @@ document.addEventListener('DOMContentLoaded', async (e) => {
             if (senderId !== chatId) {
 
                 const messages = response.messages.map(message => {
+
+                    // console.log(chatId)
+                    // if (recieverId === message.recieverId.toString()) {
+
+                    //     return {
+                    //         ...message,
+                    //         position: 'right'
+
+                    //     }
+                    // } else {
+
+                    //     return {
+                    //         ...message,
+                    //         position: 'left'
+                    //     }
+                    // }
 
                     recieverId === message.recieverId.toString() ? message = {
                         ...message,
@@ -248,11 +263,6 @@ function getTime(date = new Date()) {
 
 // socket to broadcast the message
 socket.on('broadcast', (data) => {
-
-    appendMessage(data, 'left')
-})
-
-socket.on('recieve-message', (data) => {
 
     appendMessage(data, 'left')
 })
