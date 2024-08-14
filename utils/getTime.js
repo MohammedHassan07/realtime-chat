@@ -1,11 +1,14 @@
 function getTime() {
     
-    const date = new Date()
-    
-    let hours = date.getHours()
+    const dateTime = new Date()
+    let hours = dateTime.getHours()
     const ampm = hours >= 12 ? 'PM' : 'AM'
-    
-    return `${hours}:${date.getMinutes()} ${ampm}`
+
+    hours = hours % 12
+    hours = hours ? hours : 12
+
+    console.log(`time: ${hours}:${dateTime.getMinutes()} ${ampm}`)
+    return `${hours}:${dateTime.getMinutes()} ${ampm}`
 }
 
 module.exports = getTime
