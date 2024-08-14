@@ -2,6 +2,7 @@ console.log('home.js')
 
 import makeRequest from './utils/makeRequest.js'
 import makeGetRequest from './utils/makeGetRequest.js'
+import getTime from './utils/getTime.js'
 
 // socket connection
 const socket = io({
@@ -20,7 +21,6 @@ let recieverId;
 let chatId;
 let userName;
 let senderId
-let time;
 
 // function to create new input field
 function addNewInput(inputField) {
@@ -45,51 +45,36 @@ document.addEventListener('DOMContentLoaded', async (e) => {
 
         chat.addEventListener('click', async (e) => {
 
-            // chatId = document.getAttribute('id')
-            document.getElementById('messages').innerHTML = ''
-            const response = await clickOnChat(e)
+            chatId = e.target.getAttribute('id')
+            recieverId = chatId
 
-            // console.log(response)
+            // console.log(chatId, recieverId)
+
+            document.getElementById('messages').innerHTML = ''
+            const response = await clickOnChatTogetMessages(e)
 
             senderId = response.messages[0].senderId
-            // recieverId = response.messages[0].recieverId
+            // console.log(senderId, chatId)
 
+            // update the position of messages
             if (senderId !== chatId) {
 
                 const messages = response.messages.map(message => {
 
-                    // console.log(chatId)
-                    // if (recieverId === message.recieverId.toString()) {
-
-                    //     return {
-                    //         ...message,
-                    //         position: 'right'
-
-                    //     }
-                    // } else {
-
-                    //     return {
-                    //         ...message,
-                    //         position: 'left'
-                    //     }
-                    // }
-
-                    recieverId === message.recieverId.toString() ? message = {
+                    chatId === message.recieverId.toString() ? message = {
                         ...message,
                         position: 'right'
                     } : message = {
                         ...message,
                         position: 'left'
-
                     }
 
                     return message
                 })
 
                 messages.forEach(message => {
-                    // console.log(message)
 
-                    getTime(message.createdAt)
+                    const time = getTime(message.createdAt)
                     appendMessage({ message: message.message, time }, message.position)
                 })
             }
@@ -159,7 +144,7 @@ btnSend.addEventListener('click', (e) => {
     const inputMessage = document.getElementById('input-message').value.trim()
     // console.log('send button', inputMessage)
 
-    getTime()
+    const time = getTime()
     appendMessage({ message: inputMessage, time }, 'right')
     document.getElementById('input-message').value = ''
 
@@ -196,7 +181,7 @@ function sendMessage(data) {
     socket.emit('send-message', data)
 }
 
-// render chats
+// render chats in aside container
 async function renderChats(url, cotnainerId) {
 
     let chatsList = document.getElementById(cotnainerId)
@@ -227,17 +212,12 @@ async function renderChats(url, cotnainerId) {
         li.innerHTML = innerMarkup
         chatsList.appendChild(li)
     })
-
-
 }
 
 // click on chats --> get all the message of that chat
-async function clickOnChat(e) {
+async function clickOnChatTogetMessages(e) {
 
-    // console.log(e.target.getAttribute('id'))
-
-    recieverId = e.target.getAttribute('id')
-    console.log('click chat', recieverId)
+    // console.log('click chat', recieverId, chatId)
 
     userName = e.target.innerText
     document.getElementById('user-name').innerText = userName
@@ -249,20 +229,10 @@ async function clickOnChat(e) {
     return response
 }
 
-// function to get the time
-function getTime(date = new Date()) {
 
-    const dateTime = new Date(date)
-    let hours = dateTime.getHours()
-    const ampm = hours >= 12 ? 'PM' : 'AM'
-
-    hours = hours % 12
-    hours = hours ? hours : 12
-    time = `${hours}:${dateTime.getMinutes()} ${ampm}`
-}
 
 // socket to broadcast the message
-socket.on('broadcast', (data) => {
+socket.on('ecieve-message', (data) => {
 
     appendMessage(data, 'left')
 })
