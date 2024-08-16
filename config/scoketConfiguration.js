@@ -24,6 +24,7 @@ function configureSocketConnection(server) {
 
         const userId = socket.user._id.toString()
 
+        // use redis for persistent data storage for the private chat
         users[userId] = socket.id
         // console.log('users --> ', users)
 

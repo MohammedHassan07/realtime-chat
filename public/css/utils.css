@@ -249,7 +249,13 @@ ul li {
 
     margin-top: 50px;
 }
+.mb-5 {
+    margin-bottom: 5px;
+}
 
+.ml-16 {
+    margin-left: 16px;
+}
 /* padding */
 .p-6 {
 

@@ -40,7 +40,7 @@ const getMessages = async (req, res) => {
                 ]
             }).lean()   // lean() is used to fetch the document only, if not used mongodb will return some other text fields also
 
-        console.log('messages-->', messages)
+        // console.log('messages-->', messages)
         if (!messages) return res.status(404).json({ flag: false, message: 'No chat Found' })
 
         return res.status(200).json({ flag: true, messages })

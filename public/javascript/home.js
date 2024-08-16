@@ -25,16 +25,16 @@ user = document.getElementById('user')
 user.innerText = localStorage.getItem('userName')
 
 // function to create new input field
-function addNewInput(inputField) {
+// function addNewInput(inputField) {
 
-    const div = document.createElement('div')
+//     const div = document.createElement('div')
 
-    div.innerHTML =
-        `
-            <input class="input" type="number" placeholder="Enter number">
-        `
-    addMemberForm.insertBefore(div, inputField.nextElementSibling)
-}
+//     div.innerHTML =
+//         `
+//             <input class="input" type="number" placeholder="Enter number">
+//         `
+//     addMemberForm.insertBefore(div, inputField.nextElementSibling)
+// }
 
 // load chats in aside container, also get the messages when clicked on any perticular chat
 document.addEventListener('DOMContentLoaded', async (e) => {
@@ -102,11 +102,9 @@ bntCreateGroup.addEventListener('click', (e) => {
     document.getElementById('overlay').style.zIndex = 0;
     addMemberForm.classList.remove('hide')
 
-    addMemberForm.addEventListener('focusin', function (event) {
-
-        if (event.target.classList.contains('input') && !event.target.nextElementSibling)
-            addNewInput(event.target);
-    })
+    // console.log(e, localStorage.getItem('userName'))
+    const groupName = document.getElementById('group-name')
+    
 })
 
 // add member submit button 
