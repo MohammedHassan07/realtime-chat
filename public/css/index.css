@@ -21,9 +21,13 @@ aside {
 }
 
 #add-members {
-
+    flex-direction: column;
+    padding: 30px;
+    gap: 18px;
+    justify-content: start;
+    align-items: normal;
     width: 30vw;
-    height: 50vh;
+    height: 100vh;
     overflow-y: auto;
     background: rgba(0, 135, 20, 0.45);
     backdrop-filter: blur(74px);
@@ -31,8 +35,10 @@ aside {
     border: 2px solid rgba(0, 135, 20, 0.45);
     border-radius: 6px;
     position: absolute;
-    top: 19%;
-    left: 40%;
+    /* top: 19%;
+    left: 40%; */
+    top: 0;
+    right: 0;
     color: var(--text-3);
 }
 
@@ -49,7 +55,8 @@ aside {
     /* width: 100%; */
 }
 
-.chats {
+.chats,
+.group-chat {
     border: 2px solid var(--border-1);
     border-radius: 6px;
     padding: 0px 12px;
@@ -133,8 +140,15 @@ textarea:focus {
     outline: none;
 }
 
+#group-name,
+#search-users {
+
+    background-color: var(--bg-1);
+    color: var(--text-3);
+}
+
 .create-group-img-container {
- 
+
     width: 58px;
     height: 56px;
 }
@@ -142,4 +156,33 @@ textarea:focus {
 .input-checkbox {
     width: 32px;
     height: 24px;
+}
+
+.selected {
+    background-color: var(--bg-1);
+    border: 2px solid var(--border-1);
+    color: var(--text-3);
+    border-radius: 103px 103px 103px 103px;
+    padding: 4px;
+    gap: 5px;
+    max-width: 8em;
+    cursor: pointer;
+}
+
+.selected-img {
+
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+}
+
+#selected-user-name {
+
+    font-size: 18px;
+}
+
+#deselect-user {
+    width: 12px;
+    height: 12px;
+    margin-bottom: 5px;
 }

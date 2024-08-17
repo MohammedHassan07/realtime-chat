@@ -101,36 +101,24 @@ bntCreateGroup.addEventListener('click', (e) => {
     e.preventDefault()
     document.getElementById('overlay').style.zIndex = 0;
     addMemberForm.classList.remove('hide')
-
-    // console.log(e, localStorage.getItem('userName'))
-    const groupName = document.getElementById('group-name')
-    
 })
 
-// add member submit button 
+// create group submit button 
 const btnAddMember = document.getElementById('btn-add-members')
 btnAddMember.addEventListener('click', async (e) => {
     e.preventDefault()
 
-    const inputFields = document.querySelectorAll('.input')
-
     groupName = document.getElementById('group-name').value
 
-    const memberNumbers = Array.from(inputFields)
-        .map(input => input.value)
-        .filter(value => value !== "" && value !== undefined)
-
-
-    console.log(memberNumbers)
     const url = ''
-    const response = await makeRequest(url, { memberNumbers, groupName })
-    console.log(response)
+    // const response = await makeRequest(url, { memberNumbers, groupName })
+    // console.log(response)
 
-    if (response.flag) {
+    // if (response.flag) {
 
-        addMemberForm.classList.add('hide')
-        alert(response.message)
-    }
+    //     addMemberForm.classList.add('hide')
+    //     alert(response.message)
+    // }
 })
 
 // focus the message  input on load 
@@ -239,3 +227,35 @@ socket.on('recieve-message', (data) => {
 
     appendMessage(data, 'left')
 })
+
+// search user on input
+const searchUsers = document.getElementById('search-users')
+searchUsers.addEventListener('input', (e) => {
+
+    userName = e.target.value
+    let users = {}
+    setTimeout(() => {
+
+        const GET_USERS_URL = ''
+        // makeRequest(url, userName)
+
+        // append the users in create group form
+
+    }, 5000)
+})
+
+// click on selected users
+const selectedUser = document.querySelectorAll('#group-chats-list .group-chat')
+selectedUser.forEach(user => {
+    user.addEventListener('click', () => {
+        
+        // check box
+        const checkBox = this.querySelector('.input-checkbox')
+        checkBox.checked = !checkBox.checked
+
+        const userName = this.querySelector('#liste-user-name')
+        console.log(userName)
+
+    })
+})
+console.log(selectedUser)
