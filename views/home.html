@@ -15,6 +15,7 @@
 
     <section class="flex">
 
+        <!-- chat list -->
         <aside>
 
             <div class="wp-100 flex al-center sp-between">
@@ -34,22 +35,52 @@
             <!-- chats -->
             <div class="wp-100">
                 <ul id="chats-list">
-                    <!-- <li class="chats">
+                    <li class="chats">
                         <div class="container justify-start al-start p-6 gap-12">
                             <div class="img-container">
-                                <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg"
-                                    alt="">
+                                <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt="">
                             </div>
                             <div class="mt-12">
                                 <p class="fs-18">Potter</p>
                             </div>
                         </div>
-                    </li> -->
+                    </li>
+                    <li class="chats">
+                        <div class="container justify-start al-start p-6 gap-12">
+                            <div class="img-container">
+                                <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt="">
+                            </div>
+                            <div class="mt-12">
+                                <p class="fs-18">Potter</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="chats">
+                        <div class="container justify-start al-start p-6 gap-12">
+                            <div class="img-container">
+                                <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt="">
+                            </div>
+                            <div class="mt-12">
+                                <p class="fs-18">Potter</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="chats">
+                        <div class="container justify-start al-start p-6 gap-12">
+                            <div class="img-container">
+                                <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt="">
+                            </div>
+                            <div class="mt-12">
+                                <p class="fs-18">Potter</p>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </aside>
 
-        <main class="vh-100 ">
+        <!-- message window -->
+        <main class="vh-100">
             <div class="title">
                 <h2 id="user-name"></h2>
             </div>
@@ -71,104 +102,143 @@
                 <button id="btn-send" class="btn">Send</button>
             </div>
         </main>
-    </section>
 
-    <!-- create group -->
-    <div id="overlay"></div>
-    <form id="add-members" class=" hide">
+        <!-- ceate group form -->
 
-        <div class="t-center wp-100">
-            <h3>
-                Add Members
-            </h3>
-        </div>
+        <!-- create group -->
+        <div id="overlay"></div>
+        <form id="add-members" class="hide wp-80 vh-100">
 
-        <div class="wp-100">
-            <input id="group-name" type="text" placeholder="Enter Group Name">
-        </div>
-
-        <!-- search users -->
-        <div>
-            <div>
-
-                <input id="search-users" type="text" placeholder="Search users">
+            <div class="t-center wp-100">
+                <h3>
+                    Add Members
+                </h3>
             </div>
-            <div id="selected-users flex wrap">
-                <div class="selected container">
-                    <div class="selected-img">
-                        <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt="">
-                    </div>
-                    <div>
-                        <p id="selected-user-name">Potter</p>
-                    </div>
-                    <div id="deselect-user">
-                        <img class="wp-100 hp-100" src="/images/close.png" alt="">
+
+            <div class="wp-100">
+                <input id="group-name" type="text" placeholder="Enter Group Name">
+            </div>
+
+            <!-- search users -->
+            <div>
+                <div>
+
+                    <input id="search-users" type="text" placeholder="Search users">
+                </div>
+                <div id="selected-users flex wrap">
+                    <div class="selected container">
+                        <div class="selected-img">
+                            <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt="">
+                        </div>
+                        <div>
+                            <p id="selected-user-name">Potter</p>
+                        </div>
+                        <div id="deselect-user">
+                            <img class="wp-100 hp-100" src="/images/close.png" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- users lists on search -->
-        <div class="wp-100">
-            <button id="btn-add-members" class="btn ">Submit</button>
-        </div>
-        <div class="horizontal-line"></div>
-        <div class="wp-100">
-            <ul id="group-chats-list">
-                <li class="group-chat gap-17">
-                    <div class="container justify-start p-6 gap-12">
-                        <div>
-                            <input class="input-checkbox" type="checkbox" id="">
-                        </div>
-
-                        <div class="container">
-
-                            <div class="create-group-img-container">
-                                <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt="">
+            <!-- users lists on search -->
+            <div class="wp-100">
+                <button id="btn-add-members" class="btn ">Submit</button>
+            </div>
+            <div class="horizontal-line"></div>
+            <div class="wp-100">
+                <ul id="group-chats-list">
+                    <li class="group-chat gap-17">
+                        <div class="container justify-start p-6 gap-12">
+                            <div>
+                                <input class="input-checkbox" type="checkbox" id="">
                             </div>
-                            <div class="ml-16 mb-5">
-                                <p id="lists-user-name" class="fs-18">Potter</p>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="group-chat gap-17">
-                    <div class="container justify-start p-6 gap-12">
-                        <div>
-                            <input class="input-checkbox" type="checkbox" id="">
-                        </div>
 
-                        <div class="container">
+                            <div class="container">
 
-                            <div class="create-group-img-container">
-                                <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt="">
-                            </div>
-                            <div class="ml-16 mb-5">
-                                <p id="lists-user-name" class="fs-18">Potter</p>
+                                <div class="create-group-img-container">
+                                    <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt="">
+                                </div>
+                                <div class="ml-16 mb-5">
+                                    <p id="lists-user-name" class="fs-18">Potter</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-                <li class="group-chat gap-17">
-                    <div class="container justify-start p-6 gap-12">
-                        <div>
-                            <input class="input-checkbox" type="checkbox" id="">
-                        </div>
+                    </li>
+                    <li class="group-chat gap-17">
+                            <div class="container justify-start p-6 gap-12">
+                                <div>
+                                    <input class="input-checkbox" type="checkbox" id="">
+                                </div>
 
-                        <div class="container">
+                                <div class="container">
 
-                            <div class="create-group-img-container">
-                                <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt="">
+                                    <div class="create-group-img-container">
+                                        <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt="">
+                                    </div>
+                                    <div class="ml-16 mb-5">
+                                        <p id="lists-user-name" class="fs-18">Potter</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="ml-16 mb-5">
-                                <p id="lists-user-name" class="fs-18">Potter</p>
+                        </li>
+                        <li class="group-chat gap-17">
+                            <div class="container justify-start p-6 gap-12">
+                                <div>
+                                    <input class="input-checkbox" type="checkbox" id="">
+                                </div>
+
+                                <div class="container">
+
+                                    <div class="create-group-img-container">
+                                        <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt="">
+                                    </div>
+                                    <div class="ml-16 mb-5">
+                                        <p id="lists-user-name" class="fs-18">Potter</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    <li class="group-chat gap-17">
+                        <div class="container justify-start p-6 gap-12">
+                            <div>
+                                <input class="input-checkbox" type="checkbox" id="">
+                            </div>
+
+                            <div class="container">
+
+                                <div class="create-group-img-container">
+                                    <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt="">
+                                </div>
+                                <div class="ml-16 mb-5">
+                                    <p id="lists-user-name" class="fs-18">Potter</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </form>
+                    </li>
+                    <li class="group-chat gap-17">
+                        <div class="container justify-start p-6 gap-12">
+                            <div>
+                                <input class="input-checkbox" type="checkbox" id="">
+                            </div>
+
+                            <div class="container">
+
+                                <div class="create-group-img-container">
+                                    <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt="">
+                                </div>
+                                <div class="ml-16 mb-5">
+                                    <p id="lists-user-name" class="fs-18">Potter</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </form>
+    </section>
+
+
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="/javascript/home.js" type="module"></script>

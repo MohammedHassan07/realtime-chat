@@ -1,8 +1,15 @@
+section {
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
 aside {
 
     background-color: var(--bg-1);
     height: 100vh;
-    width: 45vw;
+    width: 70%;
     border-right: 2px solid var(--border-1);
     color: var(--text-3);
     padding: 15px 16px;
@@ -20,27 +27,36 @@ aside {
     cursor: pointer;
 }
 
+
+
 #add-members {
-    flex-direction: column;
+
     padding: 30px;
     gap: 18px;
+    /* display: flex; */
+    flex-direction: column;
     justify-content: start;
     align-items: normal;
-    width: 30vw;
-    height: 100vh;
     overflow-y: auto;
     background: rgba(0, 135, 20, 0.45);
     backdrop-filter: blur(74px);
     box-shadow: 0px 8px 35px 0 rgba(0, 135, 20, 0.45);
     border: 2px solid rgba(0, 135, 20, 0.45);
     border-radius: 6px;
-    position: absolute;
-    /* top: 19%;
-    left: 40%; */
-    top: 0;
-    right: 0;
     color: var(--text-3);
+
+    /* 
+    opacity: 0;
+    transform: translateX(20vw);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    Smooth transition for opacity and position */
 }
+
+.slide {
+    /* opacity: 1;
+    transform: translateY(0); */
+}
+
 
 #overlay {
     position: absolute;
@@ -51,8 +67,8 @@ aside {
     z-index: -1;
 }
 
-#add-members div {
-    /* width: 100%; */
+#add-members input {
+    padding: 18px;
 }
 
 .chats,
@@ -73,7 +89,7 @@ main {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    width: 100%;
+    width: 119em;
     align-items: center;
     background-color: var(--bg-1);
     color: white;
@@ -163,16 +179,17 @@ textarea:focus {
     border: 2px solid var(--border-1);
     color: var(--text-3);
     border-radius: 103px 103px 103px 103px;
-    padding: 4px;
-    gap: 5px;
+    padding: 3px 0px 3px 0px;
+    gap: 8px;
     max-width: 8em;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 .selected-img {
 
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
 }
 
@@ -182,7 +199,7 @@ textarea:focus {
 }
 
 #deselect-user {
-    width: 12px;
-    height: 12px;
-    margin-bottom: 5px;
+    width: 10px;
+    height: 10px;
+    margin-bottom: 10px;
 }

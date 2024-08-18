@@ -92,6 +92,8 @@ document.addEventListener('DOMContentLoaded', async (e) => {
 document.getElementById('overlay').addEventListener('click', () => {
 
     addMemberForm.classList.add('hide')
+
+    addMemberForm.classList.remove('slide')
     document.getElementById('overlay').style.zIndex = -1;
 })
 
@@ -101,6 +103,7 @@ bntCreateGroup.addEventListener('click', (e) => {
     e.preventDefault()
     document.getElementById('overlay').style.zIndex = 0;
     addMemberForm.classList.remove('hide')
+    addMemberForm.classList.add('slide')
 })
 
 // create group submit button 
