@@ -250,15 +250,14 @@ searchUsers.addEventListener('input', (e) => {
 // click on selected users
 const selectedUser = document.querySelectorAll('#group-chats-list .group-chat')
 selectedUser.forEach(user => {
-    user.addEventListener('click', () => {
+    user.addEventListener('click', (e) => {
         
         // check box
-        const checkBox = this.querySelector('.input-checkbox')
+        const checkBox = e.currentTarget.querySelector('.input-checkbox')
         checkBox.checked = !checkBox.checked
 
-        const userName = this.querySelector('#liste-user-name')
+        const userName = e.currentTarget.querySelector('.lists-user-name').innerText
         console.log(userName)
 
     })
 })
-console.log(selectedUser)
