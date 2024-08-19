@@ -8,6 +8,8 @@ const hashPassword = require("../utils/hashPassword")
 const authenticate = (req, res) => {
     res.render('authentication.html')
 }
+
+// register user
 const registerUser = async (req, res) => {
 
     try {
@@ -122,9 +124,34 @@ const loginUser = async (req, res) => {
     return
 
 }
+
+// get user by name
+const getUserByName = async (req, res) => {
+
+    const userName = req.params.userName
+
+    try {
+
+        const users = await userModel.find({ name: userName }, { password: 0, mobile: 0}) // exclude password and mobile
+        console.log(users)
+
+        if (users) {
+            res.status(200).json({ flag: true, users })
+            return
+        }
+
+        return res.status(404).json({ flag: false, message: 'No User Found' })
+    } catch (error) {
+
+        console.log(error)
+        res.status(500).json({ message: error })
+    }
+}
+
 module.exports = {
 
     registerUser,
     loginUser,
-    authenticate
+    authenticate,
+    getUserByName
 }

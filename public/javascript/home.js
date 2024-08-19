@@ -233,25 +233,43 @@ socket.on('recieve-message', (data) => {
 
 // search user on input
 const searchUsers = document.getElementById('search-users')
-searchUsers.addEventListener('input', (e) => {
+
+// debounce function
+function debounce(func, delay) {
+    
+    let timeOutId
+    return function (...args) {
+        clearTimeout(timeOutId)
+        timeOutId = setTimeout(() => { func.apply(this, args) }, delay)
+    }
+}
+
+// debounce handler input
+function handleInput(e) {
 
     userName = e.target.value
     let users = {}
-    setTimeout(() => {
+    setTimeout(async () => {
 
-        const GET_USERS_URL = ''
-        // makeRequest(url, userName)
+        console.log(userName)
+        const GET_USERS_URL = `/user/get-user-by-name/${userName}`
+
+        const response = await makeGetRequest(GET_USERS_URL)
 
         // append the users in create group form
 
-    }, 5000)
-})
+    }, 3000)
+}
+
+const debounceHandleInput = debounce(handleInput, 1500)
+searchUsers.addEventListener('input', debounceHandleInput)
+
 
 // click on selected users
 const selectedUser = document.querySelectorAll('#group-chats-list .group-chat')
 selectedUser.forEach(user => {
     user.addEventListener('click', (e) => {
-        
+
         // check box
         const checkBox = e.currentTarget.querySelector('.input-checkbox')
         checkBox.checked = !checkBox.checked
