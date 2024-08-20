@@ -24,18 +24,6 @@ let userName;
 user = document.getElementById('user')
 user.innerText = localStorage.getItem('userName')
 
-// function to create new input field
-// function addNewInput(inputField) {
-
-//     const div = document.createElement('div')
-
-//     div.innerHTML =
-//         `
-//             <input class="input" type="number" placeholder="Enter number">
-//         `
-//     addMemberForm.insertBefore(div, inputField.nextElementSibling)
-// }
-
 // load chats in aside container, also get the messages when clicked on any perticular chat
 document.addEventListener('DOMContentLoaded', async (e) => {
 
@@ -91,9 +79,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
 // close create group form
 document.getElementById('overlay').addEventListener('click', () => {
 
-    addMemberForm.classList.add('hide')
-
-    addMemberForm.classList.remove('slide')
+    addMemberForm.style.display = 'none'
     document.getElementById('overlay').style.zIndex = -1;
 })
 
@@ -102,8 +88,7 @@ bntCreateGroup.addEventListener('click', (e) => {
 
     e.preventDefault()
     document.getElementById('overlay').style.zIndex = 0;
-    addMemberForm.classList.remove('hide')
-    addMemberForm.classList.add('slide')
+    addMemberForm.style.display = 'flex'
 })
 
 // create group submit button 
@@ -236,7 +221,7 @@ const searchUsers = document.getElementById('search-users')
 
 // debounce function
 function debounce(func, delay) {
-    
+
     let timeOutId
     return function (...args) {
         clearTimeout(timeOutId)
@@ -251,14 +236,47 @@ function handleInput(e) {
     let users = {}
     setTimeout(async () => {
 
-        console.log(userName)
         const GET_USERS_URL = `/user/get-user-by-name/${userName}`
 
         const response = await makeGetRequest(GET_USERS_URL)
 
-        // append the users in create group form
+        if (!response.flag) {
+            console.log(response.message)
+            return
+        }
 
-    }, 3000)
+        // append the users in create group form
+        let chatList = document.getElementById('group-chats-list')
+        chatList.innerHTML = ''
+        response.users.forEach(user => {
+
+            const list = document.createElement('li')
+            list.classList.add('group-chat', 'gap-17')
+            list.innerHTML = `
+                <div class="container justify-start p-6 gap-12">
+                        <div>
+                            <input class="input-checkbox" type="checkbox" id="${user._id}">
+                        </div>
+
+                        <div class="container">
+
+                            <div class="create-group-img-container">
+                                <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt="">
+                            </div>
+                            <div class="ml-16 mb-5">
+                                <p id="${user._id}" class="fs-18 lists-user-name">${user.name}</p>
+                            </div>
+                        </div>
+                    </div>`
+
+
+            chatList.append(list)
+
+        })
+
+        // onclic on li 
+
+    }, 1500)
 }
 
 const debounceHandleInput = debounce(handleInput, 1500)
@@ -270,6 +288,7 @@ const selectedUser = document.querySelectorAll('#group-chats-list .group-chat')
 selectedUser.forEach(user => {
     user.addEventListener('click', (e) => {
 
+        console.log(e)
         // check box
         const checkBox = e.currentTarget.querySelector('.input-checkbox')
         checkBox.checked = !checkBox.checked

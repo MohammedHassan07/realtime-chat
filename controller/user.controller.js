@@ -129,13 +129,17 @@ const loginUser = async (req, res) => {
 const getUserByName = async (req, res) => {
 
     const userName = req.params.userName
+    const pattern = new RegExp(userName, 'i')
 
     try {
 
-        const users = await userModel.find({ name: userName }, { password: 0, mobile: 0}) // exclude password and mobile
-        console.log(users)
+        const users = await userModel.find({
 
-        if (users) {
+           name: pattern
+        }, { password: 0, mobile: 0 }).lean() // exclude password and mobile
+        // console.log(users)
+
+        if (users.length != 0) {
             res.status(200).json({ flag: true, users })
             return
         }

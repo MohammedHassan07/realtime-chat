@@ -27,34 +27,19 @@ aside {
     cursor: pointer;
 }
 
-
-
 #add-members {
 
     padding: 30px;
     gap: 18px;
-    /* display: flex; */
+    display: none;
     flex-direction: column;
     justify-content: start;
-    overflow-y: auto;
     background: rgba(0, 135, 20, 0.45);
     backdrop-filter: blur(74px);
     box-shadow: 0px 8px 35px 0 rgba(0, 135, 20, 0.45);
     border: 2px solid rgba(0, 135, 20, 0.45);
     color: var(--text-3);
-
-    /* 
-    opacity: 0;
-    transform: translateX(20vw);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    Smooth transition for opacity and position */
 }
-
-.slide {
-    /* opacity: 1;
-    transform: translateY(0); */
-}
-
 
 #overlay {
     position: absolute;
@@ -171,7 +156,10 @@ textarea:focus {
     width: 32px;
     height: 24px;
 }
+#group-chats-list {
 
+    overflow-y: auto;
+}
 .selected {
     background-color: var(--bg-1);
     border: 2px solid var(--border-1);
