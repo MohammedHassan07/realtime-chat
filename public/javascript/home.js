@@ -20,6 +20,8 @@ let groupName;
 let recieverId;
 let chatId;
 let userName;
+let userToAddInGroup;
+let userCheckBox
 
 user = document.getElementById('user')
 user.innerText = localStorage.getItem('userName')
@@ -269,13 +271,8 @@ function handleInput(e) {
                         </div>
                     </div>`
 
-
             chatList.append(list)
-
         })
-
-        // onclic on li 
-
     }, 1500)
 }
 
@@ -283,18 +280,56 @@ const debounceHandleInput = debounce(handleInput, 1500)
 searchUsers.addEventListener('input', debounceHandleInput)
 
 
-// click on selected users
-const selectedUser = document.querySelectorAll('#group-chats-list .group-chat')
-selectedUser.forEach(user => {
-    user.addEventListener('click', (e) => {
+// click on selected users list items
+let usersInGroup = []
+const groupChatListItems = document.getElementById('group-chats-list')
+groupChatListItems.addEventListener('click', (event) => {
 
-        console.log(e)
-        // check box
-        const checkBox = e.currentTarget.querySelector('.input-checkbox')
-        checkBox.checked = !checkBox.checked
+    if (event.target.closest('li.group-chat')) {
 
-        const userName = e.currentTarget.querySelector('.lists-user-name').innerText
-        console.log(userName)
+        const listItem = event.target.closest('li.group-chat')
+        userCheckBox = listItem.querySelector('.input-checkbox')
+        userToAddInGroup = listItem.querySelector('.lists-user-name')
 
-    })
+        userCheckBox.checked = !userCheckBox.checked
+
+        if (userCheckBox.checked) {
+
+            const userName = userToAddInGroup.innerText
+            const userId = userToAddInGroup.getAttribute('id')
+
+            usersInGroup.push({ userId, userName })
+
+            // console.log(userCheckBox.checked, usersInGroup)
+
+            renderSelectedUsers({ userId, userName })
+        }
+    }
 })
+
+// function to render selected users 
+function renderSelectedUsers(usersInGroup) {
+
+    const selectedUserContainer = document.getElementById('selected-users')
+
+    const selected = document.createElement('div')
+    selected.setAttribute('id', usersInGroup.userId)
+    selected.classList.add('selected', 'container')
+
+
+    const selectedUserHTML = `
+        
+            <div class="selected-img">
+                <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt="">
+            </div>
+            <div>
+                <p id="selected-user-name">${usersInGroup.userName}</p>
+            </div>
+            <div id="deselect-user">
+                <img class="wp-100 hp-100" src="/images/close.png" alt="">
+            </div>
+                    `
+
+    selected.innerHTML = selectedUserHTML
+    selectedUserContainer.append(selected)
+}
