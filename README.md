@@ -18,6 +18,6 @@ To get started with this application, follow these steps:
     Clone the Repository:
 bash ```
  git clone github.com/MohammedHassan07/realtime-chat ```
-    Install Dependencies: Run bash ``` npm install ``` or bash ``` yarn install ``` to install necessary packages.
+    Install Dependencies: Run ``` npm install ``` or ``` yarn install ``` to install necessary packages.
     Configure the Environment: Set up your environment variables as specified in sample.env.
     Run the Application: Start the server and client applications using npm start or yarn start.
