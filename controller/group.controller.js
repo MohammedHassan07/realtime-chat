@@ -3,8 +3,6 @@ const { groupModel } = require('../models/group.model')
 // create group
 const createGroup = async (req, res) => {
 
-    const { groupName, usersInGroup } = req.body
-
     try {
 
         const adminId = req.user._id
@@ -20,7 +18,6 @@ const createGroup = async (req, res) => {
             res.status(500).json({ flag: false, message: 'Internal Server Error' })
             return
         }
-        console.log('group created', savedGroup)
 
         res.status(201).json({ flag: true, message: 'Group Created Successfully' })
     } catch (error) {
