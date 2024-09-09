@@ -95,9 +95,9 @@ btnAddMember.addEventListener('click', async (e) => {
 
     groupName = document.getElementById('group-name').value
 
-    console.log(groupName, usersInGroup)
+    // console.log(groupName, usersInGroup)
 
-    const url = ''
+    const url = '/group/create-group'
     const response = await makeRequest(url, { usersInGroup, groupName })
     console.log(response)
 
