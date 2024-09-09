@@ -1,0 +1,26 @@
+version: '1.0'
+
+services:
+  db:
+    image: mongo:4.4.29
+    container_name: realtimedb
+    ports:
+      - "27017:27017"
+    volumes:
+      - realtime-volume:/data/db
+  
+  app:
+    image: realtime
+    container_name: realtime
+    
+    ports:
+      - "3000:3000"
+    
+    depends_on:
+      - db
+
+    environment:
+      - DB_URL=mongodb://127.0.0.1:27017/realtime
+
+volumes:
+  realtime-volume:
