@@ -1,11 +1,11 @@
 const createGroup = async (req, res) => {
 
-    const { groupName, memberNumbers } = req.body
+    const { groupName, usersInGroup } = req.body
 
     try {
 
         const user = req.user
-        console.log('create group --> ', req.body)
+        console.log('create group --> ', req.body, user)
 
         
 

@@ -1,6 +1,6 @@
 console.log('home.js')
 
-import makeGetRequest from './utils/makeGetRequest.js'
+import { makeGetRequest, makeRequest } from './utils/networkRequest.js'
 import getTime from './utils/getTime.js'
 import { renderSelectedUsers, renderAsideChats, appendMessage, clickOnChatTogetMessages, renderUnselectedUser } from './utils/renderElements.js'
 
@@ -29,48 +29,48 @@ user.innerText = localStorage.getItem('userName')
 // load chats in aside container, also get the messages when clicked on any perticular chat
 document.addEventListener('DOMContentLoaded', async (e) => {
 
-        await renderAsideChats('/chats/chats', 'chats-list')
+    await renderAsideChats('/chats/chats', 'chats-list')
 
-        // click on chats
-        chats = document.querySelectorAll('.chats')
-        Array.from(chats).forEach(chat => {
+    // click on chats
+    chats = document.querySelectorAll('.chats')
+    Array.from(chats).forEach(chat => {
 
-            chat.addEventListener('click', async (e) => {
+        chat.addEventListener('click', async (e) => {
 
-                chatId = e.target.getAttribute('id')
-                recieverId = chatId
+            chatId = e.target.getAttribute('id')
+            recieverId = chatId
 
-                document.getElementById('messages').innerHTML = ''
-                const response = await clickOnChatTogetMessages(e, recieverId)
+            document.getElementById('messages').innerHTML = ''
+            const response = await clickOnChatTogetMessages(e, recieverId)
 
-                const sender = response.messages[0].senderId.toString()
-                const reciever = response.messages[0].recieverId.toString()
+            const sender = response.messages[0].senderId.toString()
+            const reciever = response.messages[0].recieverId.toString()
 
 
-                // update the position of messages
-                if (reciever !== chatId || sender !== chatId) {
+            // update the position of messages
+            if (reciever !== chatId || sender !== chatId) {
 
-                    const messages = response.messages.map(message => {
+                const messages = response.messages.map(message => {
 
-                        chatId === message.recieverId.toString() ? message = {
-                            ...message,
-                            position: 'right'
-                        } : message = {
-                            ...message,
-                            position: 'left'
-                        }
+                    chatId === message.recieverId.toString() ? message = {
+                        ...message,
+                        position: 'right'
+                    } : message = {
+                        ...message,
+                        position: 'left'
+                    }
 
-                        return message
-                    })
+                    return message
+                })
 
-                    messages.forEach(message => {
+                messages.forEach(message => {
 
-                        const time = getTime(message.createdAt)
-                        appendMessage({ message: message.message, time }, message.position)
-                    })
-                }
-            })
+                    const time = getTime(message.createdAt)
+                    appendMessage({ message: message.message, time }, message.position)
+                })
+            }
         })
+    })
 })
 
 // close create group form
@@ -94,17 +94,18 @@ btnAddMember.addEventListener('click', async (e) => {
     e.preventDefault()
 
     groupName = document.getElementById('group-name').value
-    console.log(groupName)
+
+    console.log(groupName, usersInGroup)
 
     const url = ''
-    // const response = await makeRequest(url, { memberNumbers, groupName })
-    // console.log(response)
+    const response = await makeRequest(url, { usersInGroup, groupName })
+    console.log(response)
 
-    // if (response.flag) {
+    if (response.flag) {
 
-    //     addMemberForm.classList.add('hide')
-    //     alert(response.message)
-    // }
+        addMemberForm.classList.add('hide')
+        alert(response.message)
+    }
 })
 
 
@@ -220,21 +221,17 @@ groupChatListItems.addEventListener('click', (event) => {
 
             usersInGroup.push({ userId, userName })
 
-            // console.log(userCheckBox.checked, usersInGroup)
-
             renderSelectedUsers(usersInGroup)
-        } 
-        //  else {
+        } else {
 
-        //     usersInGroup = usersInGroup.filter(user => user.userId !== userId)
-        // }
+            usersInGroup = usersInGroup.filter(user => user.userId !== userId)
+        }
         console.log(userCheckBox.checked, usersInGroup)
     }
 })
 
-
 const selectedusers = document.getElementById('selected-users')
-selectedusers.addEventListener('click', (event) => { 
+selectedusers.addEventListener('click', (event) => {
     renderUnselectedUser(event, usersInGroup)
 })
 

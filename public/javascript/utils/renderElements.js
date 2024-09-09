@@ -1,4 +1,4 @@
-import makeGetRequest from "./makeGetRequest.js"
+import { makeGetRequest } from "./networkRequest.js"
 
 // render chats in aside container
 async function renderAsideChats(url, cotnainerId) {
@@ -102,7 +102,7 @@ function renderSelectedUsers(usersInGroup) {
 
 // click to unselect user and rerender the selected users
 function renderUnselectedUser(event, usersInGroup) {
-    
+
     const listItem = event.target.closest('li.selected')
     const userId = listItem.getAttribute('id')
 

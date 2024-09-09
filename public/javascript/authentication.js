@@ -1,4 +1,4 @@
-import makeRequest from "./utils/makeRequest.js"
+import { makeRequest } from "./utils/networkRequest.js"
 
 console.log('authentication.js')
 

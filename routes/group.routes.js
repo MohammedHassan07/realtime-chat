@@ -5,5 +5,4 @@ const route = express.Router()
 
 route.get('/create-group', createGroup)
 
-
 module.exports = route
