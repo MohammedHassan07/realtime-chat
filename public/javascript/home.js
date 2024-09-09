@@ -22,6 +22,7 @@ let chatId;
 let userName;
 let userToAddInGroup;
 let userCheckBox
+let usersInGroup = []
 
 user = document.getElementById('user')
 user.innerText = localStorage.getItem('userName')
@@ -99,6 +100,7 @@ btnAddMember.addEventListener('click', async (e) => {
     e.preventDefault()
 
     groupName = document.getElementById('group-name').value
+    console.log(groupName)
 
     const url = ''
     // const response = await makeRequest(url, { memberNumbers, groupName })
@@ -281,7 +283,6 @@ searchUsers.addEventListener('input', debounceHandleInput)
 
 
 // click on selected users list items
-let usersInGroup = []
 const groupChatListItems = document.getElementById('group-chats-list')
 groupChatListItems.addEventListener('click', (event) => {
 
@@ -293,43 +294,65 @@ groupChatListItems.addEventListener('click', (event) => {
 
         userCheckBox.checked = !userCheckBox.checked
 
-        if (userCheckBox.checked) {
+        const userName = userToAddInGroup.innerText
+        const userId = userToAddInGroup.getAttribute('id')
 
-            const userName = userToAddInGroup.innerText
-            const userId = userToAddInGroup.getAttribute('id')
+        if (userCheckBox.checked) {
 
             usersInGroup.push({ userId, userName })
 
             // console.log(userCheckBox.checked, usersInGroup)
 
-            renderSelectedUsers({ userId, userName })
+            renderSelectedUsers(usersInGroup)
+        } else {
+
+            usersInGroup = usersInGroup.filter(user => user.userId !== userId)
         }
+        console.log(userCheckBox.checked, usersInGroup)
     }
+})
+
+// click to unselect user and rerender the selected users
+const selectedusers = document.getElementById('selected-users')
+selectedusers.addEventListener('click', (event) => {
+
+    const listItem = event.target.closest('li.selected')
+    const userId = listItem.getAttribute('id')
+
+    usersInGroup = usersInGroup.filter(user => user.userId !== userId)
+
+    console.log(usersInGroup)
+
+    renderSelectedUsers(usersInGroup)
 })
 
 // function to render selected users 
 function renderSelectedUsers(usersInGroup) {
 
     const selectedUserContainer = document.getElementById('selected-users')
+    selectedUserContainer.innerHTML = ''
 
-    const selected = document.createElement('div')
-    selected.setAttribute('id', usersInGroup.userId)
-    selected.classList.add('selected', 'container')
+    usersInGroup.forEach(user => {
+
+        const selected = document.createElement('li')
+        selected.setAttribute('id', user.userId)
+        selected.classList.add('selected', 'container')
 
 
-    const selectedUserHTML = `
+        const selectedUserHTML = `
         
-            <div class="selected-img">
-                <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt="">
-            </div>
-            <div>
-                <p id="selected-user-name">${usersInGroup.userName}</p>
+        <div class="selected-img">
+        <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg" alt="">
+        </div>
+        <div>
+        <p id="selected-user-name">${user.userName}</p>
             </div>
             <div id="deselect-user">
-                <img class="wp-100 hp-100" src="/images/close.png" alt="">
+            <img class="wp-100 hp-100" src="/images/close.png" alt="">
             </div>
                     `
 
-    selected.innerHTML = selectedUserHTML
-    selectedUserContainer.append(selected)
+        selected.innerHTML = selectedUserHTML
+        selectedUserContainer.append(selected)
+    })
 }

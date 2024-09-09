@@ -30,7 +30,7 @@ aside {
 #add-members {
 
     padding: 30px;
-    gap: 18px;
+    gap: 10px;
     display: none;
     flex-direction: column;
     justify-content: start;

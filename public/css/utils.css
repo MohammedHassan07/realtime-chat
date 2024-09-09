@@ -292,6 +292,12 @@ ul li {
 }
 
 /* gap */
+
+.gap-6 {
+
+    gap: 6px;
+}
+
 .gap-8 {
 
     gap: 8px;
