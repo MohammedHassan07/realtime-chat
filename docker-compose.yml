@@ -1,4 +1,4 @@
-version: '1.0'
+version: '3.0'
 
 services:
   db:
@@ -12,15 +12,12 @@ services:
   app:
     image: realtime
     container_name: realtime
-    
+    env_file: config/.env
     ports:
       - "3000:3000"
     
     depends_on:
       - db
-
-    environment:
-      - DB_URL=mongodb://127.0.0.1:27017/realtime
 
 volumes:
   realtime-volume:
