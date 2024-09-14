@@ -1,6 +1,8 @@
+const HOST = 'localhost'
+const BASE_URL = `http://${HOST}:3000`
+
 async function makeGetRequest(url) {
 
-    const BASE_URL = 'http://localhost:3000'
     const res = await fetch(`${BASE_URL}${url}`, {
 
         method: 'GET',
@@ -15,8 +17,6 @@ async function makeGetRequest(url) {
 }
 
 async function makeRequest(url, data) {
-
-    const BASE_URL = 'http://localhost:3000'
 
     const res = await fetch(`${BASE_URL}${url}`, {
 
