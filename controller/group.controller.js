@@ -5,11 +5,16 @@ const createGroup = async (req, res) => {
 
     try {
 
-        const adminId = req.user._id
+        const admin = req.user
+        const adminId = admin._id
+        console.log(admin.name, admin._id)
 
         const { groupName, usersInGroup } = req.body
+        usersInGroup.push({ userId: adminId, userName: admin.name })
 
-        const group = new groupModel({ groupName, groupAdmin:adminId, groupMemebers: usersInGroup })
+        console.log(usersInGroup)
+
+        const group = new groupModel({ groupName, groupAdmin: adminId, groupMemebers: usersInGroup })
 
         const savedGroup = await group.save()
 

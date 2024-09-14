@@ -1,5 +1,7 @@
+const { groupModel } = require("../models/group.model")
 const userModel = require("../models/user.model")
 
+// get all chats and group chats as well to show on side bar 
 const getAllChats = async (req, res) => {
 
     try {
@@ -8,13 +10,27 @@ const getAllChats = async (req, res) => {
 
         const chats = await userModel.find()
 
-        if (!chats) {
+        const groups = await groupModel.aggregate([
+            {
+                $match: {
 
-            return res.status(404).json({flag: false, message: "No chats found"})
-        }
+                    $or: [
+                        { groupAdmin: user._id },
+                        { 'groupMemebers.userId': user._id }
+                    ]
+                }
+            }
+        ])
 
-        res.status(200).json({flag: true, chats})
- 
+        if (!groups && !chats)
+            return res.status(404).json({ flag: false, message: "No chats found" })
+
+        if (!groups)
+            return res.status(200).json({ flag: true, chats })
+
+        res.status(200).json({ flag: true, chats, groups })
+        console.log(JSON.stringify(groups, null, 2))
+
     } catch (error) {
 
         console.log(error)
