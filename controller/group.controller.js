@@ -10,9 +10,11 @@ const createGroup = async (req, res) => {
         console.log(admin.name, admin._id)
 
         const { groupName, usersInGroup } = req.body
+
+        // adding the users in to usersInGroup who created the group
         usersInGroup.push({ userId: adminId, userName: admin.name })
 
-        console.log(usersInGroup)
+        // console.log(usersInGroup)
 
         const group = new groupModel({ groupName, groupAdmin: adminId, groupMemebers: usersInGroup })
 

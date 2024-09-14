@@ -43,6 +43,10 @@ ul li {
     justify-content: space-between;
 }
 
+.sp-start {
+    justify-content: start
+}
+
 .sp-even {
 
     justify-content: space-evenly;
@@ -158,10 +162,12 @@ ul li {
 
     height: 23vh;
 }
+
 .vh-47 {
 
     height: 47vh;
 }
+
 .vh-100 {
 
     height: 100vh;
@@ -258,6 +264,7 @@ ul li {
 
     margin-top: 50px;
 }
+
 .mb-5 {
     margin-bottom: 5px;
 }
@@ -265,6 +272,7 @@ ul li {
 .ml-16 {
     margin-left: 16px;
 }
+
 /* padding */
 .p-6 {
 
@@ -560,4 +568,17 @@ input[type=number] {
 
 .hide {
     display: none;
+}
+
+.category {
+
+    border-radius: 17px;
+    border: 2px solid var(--bg-3);
+    padding: 5px 9px 5px 9px;
+    cursor: pointer;
+}
+
+.category:hover {
+
+    background-color: var(--bg-3);
 }
