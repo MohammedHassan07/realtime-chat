@@ -34,7 +34,41 @@ const createGroup = async (req, res) => {
     }
 }
 
+// get all group in which user is present or the user is admin
+const getAllGroups = async (req, res) => {
+
+    try {
+
+        const user = req.user
+
+        const groups = await groupModel.aggregate([
+            {
+                $match: {
+
+                    $or: [
+                        { groupAdmin: user._id },
+                        { 'groupMemebers.userId': user._id }
+                    ]
+                }
+            }
+        ])
+
+
+        if (!groups)
+            return res.status(404).json({ flag: false, message: 'No group found' })
+
+        return res.status(200).json({ flag: true, data: groups, type: 'group' })
+
+        // console.log(JSON.stringify(groups, null, 2))
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: error })
+    }
+}
+
 module.exports = {
 
-    createGroup
+    createGroup,
+    getAllGroups
 }

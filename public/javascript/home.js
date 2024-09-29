@@ -80,14 +80,15 @@ categories.forEach(category => {
     category.addEventListener('click', async (event) => {
 
         const categoryElement = event.srcElement.innerText
-        console.log(categoryElement)
+
+        // console.log(categoryElement)
 
         if (categoryElement === 'Chats') {
 
             await renderAsideChats('/chats/chats', 'chats-list')
         } else {
 
-
+            await renderAsideChats('/group/group', 'chats-list')
         }
     })
 })

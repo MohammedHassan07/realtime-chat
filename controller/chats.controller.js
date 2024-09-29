@@ -10,26 +10,11 @@ const getAllChats = async (req, res) => {
 
         const chats = await userModel.find()
 
-        const groups = await groupModel.aggregate([
-            {
-                $match: {
-
-                    $or: [
-                        { groupAdmin: user._id },
-                        { 'groupMemebers.userId': user._id }
-                    ]
-                }
-            }
-        ])
-
-        if (!groups && !chats)
+        if (!chats)
             return res.status(404).json({ flag: false, message: "No chats found" })
 
-        if (!groups)
-            return res.status(200).json({ flag: true, chats })
 
-        res.status(200).json({ flag: true, chats, groups })
-        console.log(JSON.stringify(groups, null, 2))
+        res.status(200).json({ flag: true, data: chats, type: 'chat'})
 
     } catch (error) {
 

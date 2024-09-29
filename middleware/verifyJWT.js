@@ -6,7 +6,9 @@ const verifyJWT = async (req, res, next) => {
     try {
 
         const userToken = req.cookies.token.token
-        // console.log(userToken)
+
+        // const userToken = req.cookies.token
+        // console.log(req.cookies)
 
         if (!userToken) {
 

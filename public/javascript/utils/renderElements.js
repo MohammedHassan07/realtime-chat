@@ -6,31 +6,40 @@ async function renderAsideChats(url, cotnainerId) {
     let chatsList = document.getElementById(cotnainerId)
     chatsList.innerHTML = ''
 
-    const response = await makeGetRequest(url)
+    try {
 
-    // console.log(response)
+        const response = await makeGetRequest(url)
 
-    Array.from(response.chats).forEach(chat => {
+        // console.log(response)
 
-        const li = document.createElement('li')
-        li.classList.add('chats')
-        li.setAttribute('id', `${chat._id}`)
+        if (!response) return
 
-        const innerMarkup = `
+
+        Array.from(response.data).forEach(chat => {
+
+            const li = document.createElement('li')
+            li.classList.add('chats')
+            li.setAttribute('id', `${chat._id}`)
+
+            const innerMarkup = `
             <div id="${chat._id}" class="container justify-start al-start p-6 gap-12">
                 <div class="img-container">
                     <img class="wp-100 hp-100 brp-50" src="/images/person.jpeg"
                         alt="">
                 </div>
                 <div class="mt-12">
-                    <p id="${chat._id}" class="fs-18">${chat.name}</p>
+                    <p id="${chat._id}" class="fs-18">${response.type == 'chat' ? chat.name : chat.groupName}</p>
                 </div>
             </div>
 
         `
-        li.innerHTML = innerMarkup
-        chatsList.appendChild(li)
-    })
+            li.innerHTML = innerMarkup
+            chatsList.appendChild(li)
+        })
+
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 // click on chats --> get all the message of that chat
