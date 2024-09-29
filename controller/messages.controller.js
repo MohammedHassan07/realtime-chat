@@ -52,8 +52,22 @@ const getMessages = async (req, res) => {
     }
 }
 
+
+// get all group messages
+const getGroupMessages  = async (req, res) => {
+
+    try {
+        
+        res.status(200).json({flag: true, message: 'success'})
+    } catch (error) {
+        console.log('get group messages --> ', error)
+        res.status(500).json({ message: error })
+    }
+}
+
 module.exports = {
 
     getMessages,
-    saveMessages
+    saveMessages,
+    getGroupMessages
 }

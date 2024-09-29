@@ -7,7 +7,7 @@ const createGroup = async (req, res) => {
 
         const admin = req.user
         const adminId = admin._id
-        console.log(admin.name, admin._id)
+        // console.log(admin.name, admin._id)
 
         const { groupName, usersInGroup } = req.body
 

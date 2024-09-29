@@ -31,46 +31,49 @@ document.addEventListener('DOMContentLoaded', async (e) => {
 
     await renderAsideChats('/chats/chats', 'chats-list')
 
-    // click on chats
-    chats = document.querySelectorAll('.chats')
-    Array.from(chats).forEach(chat => {
+    await clickOnChats('chat')
 
-        chat.addEventListener('click', async (e) => {
+    // // click on chats
+    // chats = document.querySelectorAll('.chats')
+    // Array.from(chats).forEach(chat => {
 
-            chatId = e.target.getAttribute('id')
-            recieverId = chatId
+    //     chat.addEventListener('click', async (e) => {
 
-            document.getElementById('messages').innerHTML = ''
-            const response = await clickOnChatTogetMessages(e, recieverId)
+    //         chatId = e.target.getAttribute('id')
+    //         recieverId = chatId
 
-            const sender = response.messages[0].senderId.toString()
-            const reciever = response.messages[0].recieverId.toString()
+    //         document.getElementById('messages').innerHTML = ''
+    //         const response = await clickOnChatTogetMessages(e, recieverId)
+    //         // console.log(response)
+
+    //         const sender = response.messages[0].senderId.toString()
+    //         const reciever = response.messages[0].recieverId.toString()
 
 
-            // update the position of messages
-            if (reciever !== chatId || sender !== chatId) {
+    //         // update the position of messages
+    //         if (reciever !== chatId || sender !== chatId) {
 
-                const messages = response.messages.map(message => {
+    //             const messages = response.messages.map(message => {
 
-                    chatId === message.recieverId.toString() ? message = {
-                        ...message,
-                        position: 'right'
-                    } : message = {
-                        ...message,
-                        position: 'left'
-                    }
+    //                 chatId === message.recieverId.toString() ? message = {
+    //                     ...message,
+    //                     position: 'right'
+    //                 } : message = {
+    //                     ...message,
+    //                     position: 'left'
+    //                 }
 
-                    return message
-                })
+    //                 return message
+    //             })
 
-                messages.forEach(message => {
+    //             messages.forEach(message => {
 
-                    const time = getTime(message.createdAt)
-                    appendMessage({ message: message.message, time }, message.position)
-                })
-            }
-        })
-    })
+    //                 const time = getTime(message.createdAt)
+    //                 appendMessage({ message: message.message, time }, message.position)
+    //             })
+    //         }
+    //     })
+    // })
 })
 
 
@@ -86,9 +89,11 @@ categories.forEach(category => {
         if (categoryElement === 'Chats') {
 
             await renderAsideChats('/chats/chats', 'chats-list')
+            await clickOnChats('chat')
         } else {
 
             await renderAsideChats('/group/group', 'chats-list')
+            await clickOnChats('group')
         }
     })
 })
@@ -254,3 +259,53 @@ selectedusers.addEventListener('click', (event) => {
     renderUnselectedUser(event, usersInGroup)
 })
 
+async function clickOnChats(type) {
+
+    try {
+
+        // click on chats
+        chats = document.querySelectorAll('.chats')
+        Array.from(chats).forEach(chat => {
+
+            chat.addEventListener('click', async (e) => {
+
+                chatId = e.target.getAttribute('id')
+                recieverId = chatId
+
+                document.getElementById('messages').innerHTML = ''
+                const response = await clickOnChatTogetMessages(e, recieverId, type)
+                console.log(response)
+
+                const sender = response.messages[0].senderId.toString()
+                const reciever = response.messages[0].recieverId.toString()
+
+
+                // update the position of messages
+                if (reciever !== chatId || sender !== chatId) {
+
+                    const messages = response.messages.map(message => {
+
+                        chatId === message.recieverId.toString() ? message = {
+                            ...message,
+                            position: 'right'
+                        } : message = {
+                            ...message,
+                            position: 'left'
+                        }
+
+                        return message
+                    })
+
+                    messages.forEach(message => {
+
+                        const time = getTime(message.createdAt)
+                        appendMessage({ message: message.message, time }, message.position)
+                    })
+                }
+            })
+        })
+
+    } catch (error) {
+        console.log(error)
+    }
+}

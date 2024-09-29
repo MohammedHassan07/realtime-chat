@@ -10,10 +10,9 @@ async function renderAsideChats(url, cotnainerId) {
 
         const response = await makeGetRequest(url)
 
-        // console.log(response)
+        console.log(response)
 
         if (!response) return
-
 
         Array.from(response.data).forEach(chat => {
 
@@ -43,14 +42,18 @@ async function renderAsideChats(url, cotnainerId) {
 }
 
 // click on chats --> get all the message of that chat
-async function clickOnChatTogetMessages(e, recieverId) {
-
-    // console.log('click chat', recieverId, chatId)
+async function clickOnChatTogetMessages(e, recieverId, type) {
+    
+    const chatId = e.target.getAttribute('id')
+    console.log('click chat', recieverId, chatId)
 
     const userName = e.target.innerText
     document.getElementById('user-name').innerText = userName
 
-    const url = `/messages/get-messages/${recieverId}`
+    let url = ''
+    type == 'chat' ? url = `/messages/get-messages/${recieverId}` : url =  `/messages/get-group-messages/${recieverId}`
+
+    // const url = `/messages/get-messages/${recieverId}`
 
     const response = await makeGetRequest(url)
 
