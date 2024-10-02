@@ -97,7 +97,7 @@ btnRegister.addEventListener('click', async (e) => {
     error2.classList.remove('hide')
 
     setTimeout(() => {
-        // error2.classList.add('hide')
+        error2.classList.add('hide')
     }, 2000)
 
     error2.innerHTML = `<p>

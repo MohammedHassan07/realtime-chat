@@ -41,43 +41,27 @@ const getAllGroups = async (req, res) => {
 
         const user = req.user
 
-        console.log(user._id)
+        // console.log(user._id)
 
+        const groups = await groupModel.aggregate([
+            {
+                $match: {
 
-        /* TODO: get all the groups in which user is admin or the user is member, the output -->[
-        [{
-          _id: new ObjectId('66f922d8aae791abe89d1ed1'),
-          groupName: 'Party',
-          groupAdmin: new ObjectId('66f9228aaae791abe89d1ebb'),
-          groupMemebers: [ [Object], [Object], [Object] ],
-          createdAt: 2024-09-29T09:50:16.105Z,
-          updatedAt: 2024-09-29T09:50:16.105Z,
-          __v: 0
-        }]
+                    $or: [
+                        { groupAdmin: user._id },
+                        { 'groupMemebers.userId': user._id }
+                    ]
+                }
+            }
+        ])
 
-        the function is working only for the admin, it doesn`t check for the group members
-        */
-        // const groups = await groupModel.aggregate([
-        //     {
-        //         $match: {
+        if (!groups)
+            return res.status(404).json({ flag: false, message: 'No group found' })
 
-        //             $or: [
-        //                 { groupAdmin: user._id },
-        //                 { groupMemebers: user._id }
-        //             ]
-        //         }
-        //     }
-        // ])
-
-        // const groups = await groupModel.findById(user._id).populate('groupMembers')
-
-        // if (!groups)
-        //     return res.status(404).json({ flag: false, message: 'No group found' })
-
-        // res.status(200).json({ flag: true, data: groups, type: 'group' })
+        res.status(200).json({ flag: true, data: groups, type: 'group' })
 
         // console.log(JSON.stringify(groups, null, 2))
-        // console.log(groups)
+        console.log(groups)
 
     } catch (error) {
         console.log(error)

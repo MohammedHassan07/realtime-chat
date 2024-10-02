@@ -34,6 +34,7 @@ async function renderAsideChats(url, cotnainerId) {
         `
             li.innerHTML = innerMarkup
             chatsList.appendChild(li)
+            // console.log(li)
         })
 
     } catch (error) {
