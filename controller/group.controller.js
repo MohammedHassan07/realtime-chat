@@ -43,6 +43,20 @@ const getAllGroups = async (req, res) => {
 
         console.log(user._id)
 
+
+        /* TODO: get all the groups in which user is admin or the user is member, the output -->[
+        [{
+          _id: new ObjectId('66f922d8aae791abe89d1ed1'),
+          groupName: 'Party',
+          groupAdmin: new ObjectId('66f9228aaae791abe89d1ebb'),
+          groupMemebers: [ [Object], [Object], [Object] ],
+          createdAt: 2024-09-29T09:50:16.105Z,
+          updatedAt: 2024-09-29T09:50:16.105Z,
+          __v: 0
+        }]
+
+        the function is working only for the admin, it doesn`t check for the group members
+        */
         // const groups = await groupModel.aggregate([
         //     {
         //         $match: {
