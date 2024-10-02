@@ -41,25 +41,29 @@ const getAllGroups = async (req, res) => {
 
         const user = req.user
 
-        const groups = await groupModel.aggregate([
-            {
-                $match: {
+        console.log(user._id)
 
-                    $or: [
-                        { groupAdmin: user._id },
-                        { 'groupMemebers.userId': user._id }
-                    ]
-                }
-            }
-        ])
+        // const groups = await groupModel.aggregate([
+        //     {
+        //         $match: {
 
+        //             $or: [
+        //                 { groupAdmin: user._id },
+        //                 { groupMemebers: user._id }
+        //             ]
+        //         }
+        //     }
+        // ])
 
-        if (!groups)
-            return res.status(404).json({ flag: false, message: 'No group found' })
+        // const groups = await groupModel.findById(user._id).populate('groupMembers')
 
-        return res.status(200).json({ flag: true, data: groups, type: 'group' })
+        // if (!groups)
+        //     return res.status(404).json({ flag: false, message: 'No group found' })
+
+        // res.status(200).json({ flag: true, data: groups, type: 'group' })
 
         // console.log(JSON.stringify(groups, null, 2))
+        // console.log(groups)
 
     } catch (error) {
         console.log(error)

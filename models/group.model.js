@@ -6,7 +6,7 @@ const groupSchema = new Schema({
 
     groupAdmin: { type: Schema.Types.ObjectId, ref: 'User' },
 
-    groupMemebers: []
+    groupMemebers: [{type: Schema.Types.ObjectId, ref: 'User'}]
 
 }, { timestamps: true })
 

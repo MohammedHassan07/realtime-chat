@@ -53,8 +53,6 @@ async function clickOnChatTogetMessages(e, recieverId, type) {
     let url = ''
     type == 'chat' ? url = `/messages/get-messages/${recieverId}` : url =  `/messages/get-group-messages/${recieverId}`
 
-    // const url = `/messages/get-messages/${recieverId}`
-
     const response = await makeGetRequest(url)
 
     return response
