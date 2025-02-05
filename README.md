@@ -45,6 +45,25 @@ Create a `.env` file in the root directory and configure it as per `sample.env`.
 npm start  # or yarn start
 ```
 
+## Running with Docker Compose
+If you have a `docker-compose.yml` file, you can run the application using Docker Compose:
+
+### Build and Start the Containers:
+```sh
+docker-compose up --build
+```
+
+### Stop the Containers:
+```sh
+docker-compose down
+```
+
+### Running in Detached Mode:
+To run the containers in the background, use:
+```sh
+docker-compose up -d
+```
+
 ## Contributing
 Feel free to fork this repository and submit pull requests with improvements and bug fixes.
 
